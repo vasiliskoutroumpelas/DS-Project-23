@@ -141,6 +141,7 @@ int i=1;
     // Data[i].Cumulative<<endl;
         }
     }
+    //df
     
 
     cout<<Data.back().Direction<<"\t"<<Data.back().Year<<"\t"<<Data.back().Date<<"\t"<<Data.back().Weekday<<"\t"<<
