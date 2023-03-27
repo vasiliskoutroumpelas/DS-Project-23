@@ -3,23 +3,9 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include "csvExtractor.h"
 
 using namespace std;
-
-typedef struct record{
-    string Direction;
-    int Year;
-    string Date;
-    string Weekday;
-    string Country;
-    string Commodity;
-    string Transport_Mode;
-    string Measure;
-    long int Value;
-    long int Cumulative;    
-}Record;
-
-vector<Record> csvToVector(string filename);
 
 vector<Record> csvToVector(string filename) {
     vector<Record> data;
