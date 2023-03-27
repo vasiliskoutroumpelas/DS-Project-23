@@ -43,7 +43,9 @@ void insertData(int counter, string token, vector<Record>& Data){
     case 2: Data.back().Date=token; break;
     case 3: Data.back().Weekday=token; break;
     case 4: Data.back().Country=token; break;
-    case 5:{ Data.back().Commodity=token; if(token=="Logs, wood, and wood articles") cout<<Data.back().Commodity<<endl;  break;}
+    case 5: {Data.back().Commodity=token; 
+            if(token=="Milk powder, butter, and cheese") 
+            cout<<Data.back().Commodity<<endl;  break;}
     case 6: Data.back().Transport_Mode=token; break;
     case 7: Data.back().Measure=token; break;
     case 8: Data.back().Value=stoll(token); break;
@@ -114,22 +116,20 @@ int main(){
     vector<Record> Data;
     InitiateFile(file, Data);
 
+       
+        
         for (int  i = 0; i < Data.size(); i++)
         {
-            if(Data[i].Commodity=="Logs, wood, and wood articles"){
-                cout<<"YES"<<endl;
-            // cout<<Data[i].Commodity<<endl;
-        //         cout<<Data[i].Direction<<"\t"<<Data[i].Year<<"\t"<<Data[i].Date<<"\t"<<Data[i].Weekday<<"\t"<<
-        // Data[i].Country<<"\t"<<Data[i].Commodity<<"\t"<<Data[i].Transport_Mode<<"\t"<<Data[i].Measure<<"\t"<<Data[i].Value<<"\t"<<
-        // Data[i].Cumulative<<endl;
-            }
+            // if(Data[i].Commodity=="Milk powder, butter, and cheese") cout<<"True"<<endl;
+            if(Data[i].Commodity=="Milk powder, butter, and cheese")
+           cout<<Data[i].Commodity<<endl;
         }
         
-        
 
-        cout<<Data.back().Direction<<"\t"<<Data.back().Year<<"\t"<<Data.back().Date<<"\t"<<Data.back().Weekday<<"\t"<<
-        Data.back().Country<<"\t"<<Data.back().Commodity<<"\t"<<Data.back().Transport_Mode<<"\t"<<Data.back().Measure<<"\t"<<Data.back().Value<<"\t"<<
-        Data.back().Cumulative<<endl;
+
+        // cout<<Data.back().Direction<<"\t"<<Data.back().Year<<"\t"<<Data.back().Date<<"\t"<<Data.back().Weekday<<"\t"<<
+        // Data.back().Country<<"\t"<<Data.back().Commodity<<"\t"<<Data.back().Transport_Mode<<"\t"<<Data.back().Measure<<"\t"<<Data.back().Value<<"\t"<<
+        // Data.back().Cumulative<<endl;
 
 
     
