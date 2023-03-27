@@ -43,9 +43,12 @@ void insertData(int counter, string token, vector<Record>& Data){
     case 2: Data.back().Date=token; break;
     case 3: Data.back().Weekday=token; break;
     case 4: Data.back().Country=token; break;
-    case 5: {Data.back().Commodity=token; 
-            if(token=="Milk powder, butter, and cheese") 
-            cout<<Data.back().Commodity<<endl;  break;}
+    case 5:
+        Data.back().Commodity=token; 
+            if(token=="Milk powder, butter, and cheese")
+            cout<<Data.back().Commodity<<endl;  
+            break;
+        
     case 6: Data.back().Transport_Mode=token; break;
     case 7: Data.back().Measure=token; break;
     case 8: Data.back().Value=stoll(token); break;
@@ -77,7 +80,7 @@ void splitstring(stringstream& ss, vector<Record>& Data){
 
             //! next comma after ",
             ss.get();
-         
+            counter++;
         }
     }
     
@@ -92,7 +95,6 @@ Record* temp;
 //? Remove the first line of the file
 file>>line;
 // int lineNum=1;
-   
     while(getline(file, line)){
        
         temp= new Record;
