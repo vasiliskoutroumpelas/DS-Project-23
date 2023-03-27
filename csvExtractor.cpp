@@ -60,7 +60,7 @@ void splitstring(stringstream& ss, vector<Record>& Data){
 }
 
 
-void InitiateFile(ifstream& file, vector<Record>& Data){
+void csvToVector(ifstream& file, vector<Record>& Data){
 string line;
 stringstream ss(line);
 Record* record;
@@ -89,7 +89,7 @@ int main() {
     }
 
     vector<Record> Data;
-    InitiateFile(file, Data);
+    csvToVector(file, Data);
 
     for (Record row : Data) {
         cout << "Direction: " << row.Direction << endl;
@@ -103,8 +103,6 @@ int main() {
         cout << "Value: " << row.Value << endl;
         cout << "Cumulative: " << row.Cumulative << endl;
         cout << endl;
-        getchar();
     }        
-    system("pause");
     return 0;
 }
