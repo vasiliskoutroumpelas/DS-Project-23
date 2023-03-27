@@ -71,6 +71,8 @@ vector<Record> csvToVector(string filename) {
 
         getline(ss, cell, ',');
         record.Cumulative = stol(cell);
+        
+        data.push_back(record);
     }
     return data;
 }
