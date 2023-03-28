@@ -2,22 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "csvExtractor.h"
 
 using namespace std;
-
-typedef struct record{
-    string Direction;
-    string Date;
-    string Weekday;
-    string Country;
-    string Commodity;
-    string Transport_Mode;
-    string Measure;
-    long int Value;
-    long int Cumulative;
-    int Year;
-    
-}Record;
 
 void insertData(int counter, string token, vector<Record>& Data){
     switch (counter)
@@ -67,42 +54,16 @@ Record* record;
 
 // Remove the first line of the file
 getline(file, line);
-while(getline(file, line)) {
-    
-    record = new Record;
-    Data.push_back(*record);
-    ss<<line;
-    
-    splitstring(ss, Data);
-    
-    //reset stringstream
-    ss.str("");
-    ss.clear();       
-}
-}
-
-int main() {
-    ifstream file("data.csv");
-    if(!file.good()) {
-        cout<<"error"<<endl;
-        return -1;
+    while(getline(file, line)) {
+        
+        record = new Record;
+        Data.push_back(*record);
+        ss<<line;
+        
+        splitstring(ss, Data);
+        
+        //reset stringstream
+        ss.str("");
+        ss.clear();       
     }
-
-    vector<Record> Data;
-    csvToVector(file, Data);
-
-    for (Record row : Data) {
-        cout << "Direction: " << row.Direction << endl;
-        cout << "Year: " << row.Year << endl;
-        cout << "Date: " << row.Date << endl;
-        cout << "Weekday: " << row.Weekday << endl;
-        cout << "Country: " << row.Country << endl;
-        cout << "Commodity: " << row.Commodity << endl;
-        cout << "Transport Mode: " << row.Transport_Mode << endl;
-        cout << "Measure: " << row.Measure << endl;
-        cout << "Value: " << row.Value << endl;
-        cout << "Cumulative: " << row.Cumulative << endl;
-        cout << endl;
-    }        
-    return 0;
 }
