@@ -3,28 +3,29 @@
 #include <sstream>
 #include <vector>
 #include <string>
-#include "header_files/csvExtractor.h"
-#include "header_files/sort.h"
+#include "csvExtractor.h"
+#include "sort.h"
 
 void merge(vector<Record> &data, int left, int middle, int right) {
-    vector<Record>* temp = new vector<Record>;
+    vector<Record> temp;
     int i = left;
     int j = middle+1;
 
     while (i <= middle && j <= right) {
         if (data[i].Value <= data[j].Value)
-            (*temp).push_back(data[i++]);
+            temp.push_back(data[i++]);
         else 
-            (*temp).push_back(data[j++]);
+            temp.push_back(data[j++]);
     }
     
     while(i <= middle)
-        (*temp).push_back(data[i++]);
+        temp.push_back(data[i++]);
     while(j <= right)
-        (*temp).push_back(data[j++]);
+        temp.push_back(data[j++]);
 
-    data = *temp;
-    delete temp;
+    for (int i = left; i <= right; i++) {
+        data[i] = temp[i-left];
+    }
 }
 
 void mergeSort(vector<Record> &data, int left, int right) {    
