@@ -11,13 +11,7 @@ OBJ=$(OBJDIR)main.o $(OBJDIR)csvExtractor.o $(OBJDIR)mergeSort.o
 BIN=$(BINDIR)main
 
 #RULES
-all: $(OBJDIR) $(BINDIR) $(BIN)
-
-$(OBJDIR):
-	mkdir -p $@
-
-$(BINDIR):
-	mkdir -p $@
+all: $(BIN)
 
 $(BIN): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ 
