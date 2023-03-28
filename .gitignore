@@ -1,5 +1,5 @@
 .vscode/
-src/test.csv
+test.csv
 csvExtractor
 bin/*
 obj/*
