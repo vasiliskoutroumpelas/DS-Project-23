@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include "csvExtractor.h"
-
 using namespace std;
 
 vector<Record> csvToVector(string filename) {
@@ -63,21 +62,3 @@ vector<Record> csvToVector(string filename) {
     return data;
 }
 
-int main() {
-    vector<Record> data = csvToVector("data.csv");
-    
-    for (Record row : data) {
-        cout << "Direction: " << row.Direction << endl;
-        cout << "Year: " << row.Year << endl;
-        cout << "Date: " << row.Date << endl;
-        cout << "Weekday: " << row.Weekday << endl;
-        cout << "Country: " << row.Country << endl;
-        cout << "Commodity: " << row.Commodity << endl;
-        cout << "Transport Mode: " << row.Transport_Mode << endl;
-        cout << "Measure: " << row.Measure << endl;
-        cout << "Value: " << row.Value << endl;
-        cout << "Cumulative: " << row.Cumulative << endl;
-        cout << endl;
-    }
-    return 0;
-}
