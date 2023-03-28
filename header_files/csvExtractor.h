@@ -18,6 +18,8 @@ typedef struct record{
     long int Cumulative;    
 }Record;
 
-vector<Record> csvToVector(string filename);
+void csvToVector(ifstream& file, vector<Record>& Data);
+void insertData(int counter, string token, vector<Record>& Data);
+void splitstring(stringstream& ss, vector<Record>& Data);
 
 #endif
