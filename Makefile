@@ -1,6 +1,6 @@
 #FOLDERS
 OBJ=obj/
-SRC=./
+SRC=src/
 BINDIR=bin/
 INCLUDE=header_files/
 
