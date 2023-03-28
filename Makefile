@@ -1,5 +1,5 @@
 #FOLDERS
-OBJ=obj/
+OBJDIR=obj/
 SRC=src/
 BINDIR=bin/
 INCLUDE=header_files/
@@ -7,20 +7,26 @@ INCLUDE=header_files/
 #VARIABLES
 CC=g++
 CFLAGS=-g -Wall -I $(INCLUDE)
-OBJS=$(OBJ)main.o $(OBJ)csvExtractor.o $(OBJ)mergeSort.o 
+OBJ=$(OBJDIR)main.o $(OBJDIR)csvExtractor.o $(OBJDIR)mergeSort.o 
 BIN=$(BINDIR)main
 
 #RULES
-all: $(BIN)
+all: $(OBJDIR) $(BINDIR) $(BIN)
 
-$(BIN): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ 
+$(OBJDIR):
+	mkdir -p $@
 
-$(OBJ)%.o: $(SRC)%.cpp
+$(BINDIR):
+	mkdir -p $@
+
+$(BIN): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $@ 
+
+$(OBJDIR)%.o: $(SRC)%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: $(BIN)
 	$(BIN)
 
 clean:
-	$(RM) $(OBJS) $(BIN) 
+	$(RM) $(OBJ) $(BIN) 
