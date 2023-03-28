@@ -1,3 +1,4 @@
-.vscode/
-testset.csv
-csvExtractorV4
+test.csv
+csvExtractor
+bin/*
+obj/*
