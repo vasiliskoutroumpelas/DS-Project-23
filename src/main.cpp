@@ -9,10 +9,17 @@
 using namespace std;
 
 int main() {
-    vector<Record> data = csvToVector("data.csv");
+    ifstream file("data.csv");
+    if(!file.good()) {
+        cout<<"error"<<endl;
+        return -1;
+    }
+
+    vector<Record> data;
+    csvToVector(file, data);
 
     mergeSort(data, 0, data.size()-1);
-    
+
     for (Record row : data) {
         cout << "Direction: " << row.Direction << endl;
         cout << "Year: " << row.Year << endl;
@@ -25,6 +32,6 @@ int main() {
         cout << "Value: " << row.Value << endl;
         cout << "Cumulative: " << row.Cumulative << endl;
         cout << endl;
-    }
+    }        
     return 0;
 }
