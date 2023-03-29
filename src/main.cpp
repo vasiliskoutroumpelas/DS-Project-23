@@ -20,6 +20,10 @@ int main() {
 
     mergeSort(data, 0, data.size()-1);
 
+
+    //! SIKE , WHAT ARE YOU DOING HERE
+
+
     for (Record row : data) {
         cout << "Direction: " << row.Direction << endl;
         cout << "Year: " << row.Year << endl;
