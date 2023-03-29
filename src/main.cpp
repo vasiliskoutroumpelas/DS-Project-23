@@ -18,7 +18,7 @@ int main() {
     vector<Record> data;
     csvToVector(file, data);
 
-    mergeSort(data, 0, data.size()-1);
+   QuickSort(data, 0, (data.size()-1));
 
 
     //! SIKE , WHAT ARE YOU DOING HERE
