@@ -7,34 +7,34 @@
 
 using namespace std;
 
-void heapifyDown(vector<Record>& heap, int size, int i) { //function that step by step gives the vector heap property
+void heapifyDown(vector<Record>& heap, int Heapsize, int i) { //function that step by step gives the vector heap property
     int greatest = i; //father node
     int leftNode = 2 * i + 1; //left child node
     int rightNode = 2 * i + 2;  //right child node
 
-    if (leftNode < size && heap[leftNode].Cumulative > heap[greatest].Cumulative) //father index moves to the greatest element
+    if (leftNode < Heapsize && heap[leftNode].Cumulative > heap[greatest].Cumulative) //father index moves to the greatest element
         greatest = leftNode;
 
-    if (rightNode < size && heap[rightNode].Cumulative > heap[greatest].Cumulative)  //father index moves to the greatest element
+    if (rightNode < Heapsize && heap[rightNode].Cumulative > heap[greatest].Cumulative)  //father index moves to the greatest element
         greatest = rightNode;
 
-    if (greatest != i) {  //function that swaps the greatest with the least element to partially sort the heap
+    if (greatest != i) {  //swaps the greatest with the least element to partially sort the heap
         swap(heap[i], heap[greatest]);
-        heapifyDown(heap, size, greatest);
+        heapifyDown(heap, Heapsize, greatest); //recursive call for heapifcation of the branch
     }
 }
 
-void createMaxHeap(vector<Record>& heap, int size) { //function to create a heap that satisfies the heap property
-    for (int i = size / 2 - 1; i >= 0; i--)
-        heapifyDown(heap, size, i);
+void createMaxHeap(vector<Record>& heap, int Heapsize) { //function to create a heap that satisfies the heap property
+    for (int i = Heapsize / 2 - 1; i >= 0; i--)
+        heapifyDown(heap, Heapsize, i);
 }
 
 void heapSort(vector<Record>& heap) { //the main sorting algorithm
-    int size = heap.size();
+    int Heapsize = heap.size();
 
-    createMaxHeap(heap, size); //creation of the heap
+    createMaxHeap(heap, Heapsize); //creation of the heap
 
-    for (int i = size - 1; i >= 0; i--) { //consecutive swaps of the last with the root element and heapification of the vector.
+    for (int i = Heapsize - 1; i >= 0; i--) { //consecutive swaps of the last with the root element and heapification of the vector.
         swap(heap[0], heap[i]);
         heapifyDown(heap, i, 0);
     }
@@ -114,8 +114,8 @@ int main() {
 
     heapSort(data);
 
-    for (Record row : data) {
-        cout << "Date: " << row.Date << endl;
-    }
+    //for (Record row : data) {
+    //    cout << "Date: " << row.Date << endl;
+    //}
     return 0;
 }
