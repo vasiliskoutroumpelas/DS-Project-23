@@ -8,13 +8,13 @@
 using namespace std;
 
 
-int Partition(vector <Record> &Data, int s, int e)
+int Partition(vector <Record> &Data, int start, int end)
 {
 
     long int pivot = Data.front().Cumulative;
-    int pIndex = e;
+    int pIndex = end;
 
-    for(int i=e; i>s; i--)
+    for(int i=end; i>start; i--)
     {
         if(Data.at(i).Cumulative>pivot)
         {
@@ -25,7 +25,7 @@ int Partition(vector <Record> &Data, int s, int e)
     }
 
 
-    swap(Data.at(s), Data.at(pIndex));
+    swap(Data.at(start), Data.at(pIndex));
 
 
     return pIndex;
@@ -33,38 +33,18 @@ int Partition(vector <Record> &Data, int s, int e)
 }
 
 
-void QuickSort(vector <Record> &Data, int s, int e)
+void QuickSort(vector <Record> &Data, int start, int end)
 {
 
-    if(s<e)
+    if(start<end)
     {
-        int p = Partition(Data, s, e);
-        QuickSort(Data, s, (p-1)); //recursive QuickSort call for left partition
-        QuickSort(Data, (p+1), e); //recursive QuickSort call for right partition
+        int p = Partition(Data, start, end);
+        QuickSort(Data, start, (p-1)); //recursive QuickSort call for left partition
+        QuickSort(Data, (p+1), end); //recursive QuickSort call for right partition
 
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
