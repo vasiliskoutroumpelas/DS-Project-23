@@ -103,7 +103,7 @@ getline(file, line);
 }
 
 int main() {
-    ifstream file("testset.csv");
+    ifstream file("data.csv");
     if(!file.good()) {
         cout<<"error"<<endl;
         return -1;
