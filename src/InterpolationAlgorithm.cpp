@@ -147,11 +147,16 @@ ifstream file("data.csv");
     int index = interpolationSearch(data, 0, data.size() - 1, key);
 
     // If element was found
-    if (index != -1)
-        cout << "Element found at index " << index;
-    else
+    if (index != -1){
+        //cout << "Element found at index " << index;
+        cout << "Value is equal to: " << data.at(index).Value <<endl;
+        cout << "Cumulative is equal to: " << data.at(index).Cumulative << endl;
+    }
+    else{
         cout << "Element not found.";
+    }
 
 
     return 0;
 }
+
