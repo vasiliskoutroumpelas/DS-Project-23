@@ -9,7 +9,7 @@ using namespace std;
 
 
 
-  int date_to_int(string date, char del)
+  int date_to_int(string date, char del)       // function that takes the dates as string and outputs the "reversed" int (helps with comparisons later)
   {
       stringstream ss(date);
       string word;
@@ -24,7 +24,7 @@ using namespace std;
 
         }
 
-        return (10000 * Date[2] + 100 * Date[1] + Date[0]);
+        return (10000 * Date[2] + 100 * Date[1] + Date[0]);           //here the date is output as a "reversed" integer.
 
 
       }
