@@ -164,7 +164,7 @@ ifstream file("data.csv");
     int key = date_to_int(date, '/');
 
 
-    int index = binary_interpolation(data, 0, (data.size() - 1) / sizeof(int)), key);
+    int index = binary_interpolation(data, 0, data.size()-1, key);
 
     // If element was found
     if (index != -1){
