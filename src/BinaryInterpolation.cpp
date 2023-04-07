@@ -38,7 +38,7 @@ int binary_interpolation(vector <Record> &Data, int left, int right, int key){
     int next;
 
     int size = right-left+1;
-    next = (int)round((double)(size*(key - date_to_int(Data.at(left).Date, '/')) / (date_to_int(Data.at(right).Date, '/') - date_to_int(Data.at(left).Date, '/'))));
+    next = (int)round((double)(size*(key - date_to_int(Data.at(left).Date, '/')) / (date_to_int(Data.at(right).Date, '/') - date_to_int(Data.at(left).Date, '/')))) + 1;
 
     while(key != date_to_int(Data.at(next).Date, '/'))
     {
@@ -70,7 +70,7 @@ int binary_interpolation(vector <Record> &Data, int left, int right, int key){
           left = next - i * round((double)sqrt(size));
         }
 
-        next = left + round((double)(((right-left+1) * (key - date_to_int(Data.at(left).Date,'/')  / (date_to_int(Data.at(right).Date,'/') - date_to_int(Data.at(left).Date, '/'))))));
+        next = left + round((double)((right-left+1) * (key - date_to_int(Data.at(left).Date,'/'))  / (date_to_int(Data.at(right).Date,'/') - date_to_int(Data.at(left).Date, '/'))));
 
       }
       if(key == date_to_int(Data.at(next).Date, '/'))
