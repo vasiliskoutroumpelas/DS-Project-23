@@ -5,8 +5,38 @@
 #include <string>
 #include <cmath>
 #include "csvExtractor.h"
+#include "sort.h"
 
 using namespace std;
+
+void quickSort(vector<Record> &data, int left, int right)
+{
+	long int pivot;
+	int leftArrow, rightArrow;
+	leftArrow = left;
+	rightArrow = right;
+	pivot = data[(left + right) / 2].Cumulative;
+
+	while (rightArrow >= leftArrow)
+	{
+		while (data[rightArrow].Cumulative > pivot)
+			--rightArrow;
+		while (data[leftArrow].Cumulative < pivot)
+			++leftArrow;
+		if (leftArrow <= rightArrow)
+		{
+			swap(data[leftArrow], data[rightArrow]);
+			++leftArrow;
+			--rightArrow;
+		}
+	}
+
+	if (left < rightArrow)
+		 quickSort(data, left, rightArrow);
+	if (leftArrow < right)
+		 quickSort(data, leftArrow, right);
+}
+
 
 
   int date_to_int(string date, char del)       // function that takes the dates as string and outputs the "reversed" int (helps with comparisons later)
@@ -146,9 +176,22 @@ getline(file, line);
 
 
 
+bool areSortedCumulatives(vector<Record>& v) {
+    int n = v.size();
+    for(int i = 1; i < n; i++) {
+        if(v[i].Cumulative < v[i-1].Cumulative) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
 
 int main()
 {
+
 ifstream file("data.csv");
     if(!file.good()) {
         cout<<"error"<<endl;
@@ -158,11 +201,19 @@ ifstream file("data.csv");
     vector<Record> data;
     csvToVector(file, data);
 
+
+    quickSort(data, 0, (data.size()-1));
+
+    if (areSortedCumulatives(data))
+        cout << "Cumulatives are sorted." << endl;
+    else
+        cout << "Cumulatives are not sorted." << endl;
+
+
     string date;
     cout << "Enter date in DD/MM/YYYY format: " <<endl;
     cin >> date;
     int key = date_to_int(date, '/');
-
 
     int index = binary_interpolation(data, 0, data.size()-1, key);
 
@@ -175,7 +226,6 @@ ifstream file("data.csv");
     else{
         cout << "Element not found.";
     }
-
 
     return 0;
 }
