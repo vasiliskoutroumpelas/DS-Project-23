@@ -199,10 +199,10 @@ void inOrder(BstNode* node, vector<BstNode*> &nodes)
     }
     inOrder(node->left, nodes);
     nodes.push_back(node);
-
+    
+    cout << "Inorder Traversal Represantation is: " << endl;
     for(int i=0; i<nodes.size(); i++){                                  //Code For Inorder Traversal Representation (start)
 
-        cout << "Inorder Traversal Represantation is: " << endl;
         cout << nodes.at(i)->date << " | " << nodes.at(i)->value <<endl;
 
     }                                                                   //Code For Inorder Traversal Representation (end)
