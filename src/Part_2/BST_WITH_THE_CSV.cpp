@@ -2,6 +2,7 @@
 #include <bits/stdc++.h>
 
 
+
 using namespace std;
 
 
@@ -280,7 +281,9 @@ int main(){
     }
 
 
-//Code For Searching by Date.
+    root = makeBalancedTree(root);
+
+//Code For Searching by Date
 
     string date;
     cout << "Enter date to be searched\n";
@@ -288,9 +291,10 @@ int main(){
     cout << "Corresponding Value is: " << Search(root,date);
 
 
+//Code For Inorder Traversal Representation
 
 
-    root = makeBalancedTree(root);
+
 
 
 
