@@ -199,15 +199,14 @@ void inOrder(BstNode* node, vector<BstNode*> &nodes)
     }
     inOrder(node->left, nodes);
     nodes.push_back(node);
-    
-    cout << "Inorder Traversal Represantation is: " << endl;
-    for(int i=0; i<nodes.size(); i++){                                  //Code For Inorder Traversal Representation (start)
+    inOrder(node->right, nodes);
+
+
+    for(int i=0; i<nodes.size(); i++){                                     //Code For Inorder Traversal Representation (start)
 
         cout << nodes.at(i)->date << " | " << nodes.at(i)->value <<endl;
 
-    }                                                                   //Code For Inorder Traversal Representation (end)
-
-    inOrder(node->right, nodes);
+    }                                                                     //Code For Inorder Traversal Representation (end)
 }
 
 
@@ -289,7 +288,10 @@ int main(){
     }
 
 
-    root = makeBalancedTree(root);
+//Code For Inorder Traversal Representation
+
+  cout << "Inorder Traversal Represantation is: " << endl;
+  root = makeBalancedTree(root);
 
 //Code For Searching by Date
 
