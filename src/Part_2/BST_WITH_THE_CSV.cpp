@@ -278,7 +278,7 @@ int main(){
 
     BstNode* root = NULL;   //Creating an empty tree
 
-    for(int i=0; i<100; i++){
+    for(int i=0; i<data1.size(); i++){
 
         root = Insert(root, data1.at(i).date, data1.at(i).value);
 
@@ -288,6 +288,7 @@ int main(){
 //Code For Inorder Traversal Representation
 
   cout << "Inorder Traversal Represantation is: " << endl;
+  cout<< "Date       |     Value" << endl << endl;
   root = makeBalancedTree(root);
 
 //Code For Searching by Date
