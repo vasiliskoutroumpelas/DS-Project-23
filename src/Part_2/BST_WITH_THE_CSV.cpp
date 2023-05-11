@@ -2,7 +2,9 @@
 #include <bits/stdc++.h>
 
 
+
 using namespace std;
+
 
 typedef struct record
 {
@@ -175,10 +177,10 @@ BstNode* Insert(BstNode* root, string date, long int value){
 }
 
 
-bool Search(BstNode* root, string date){
+int Search(BstNode* root, string date){
 
     if(root == NULL) return false;
-    else if(date_to_int(root->date) == date_to_int(date)) return true;
+    else if(date_to_int(root->date) == date_to_int(date)) return root->value;
     else if(date_to_int(date) <= date_to_int(root->date)) return Search(root->left,date);
     else return Search(root->right,date);
 
@@ -271,21 +273,21 @@ int main(){
 
 
     BstNode* root = NULL;   //Creating an empty tree
-    
-    
-    for(int i=0; i<data1.size(); i++){
+
+    for(int i=0; i<100; i++){
 
         root = Insert(root, data1.at(i).date, data1.at(i).value);
 
     }
 
 
+//Code For Searching by Date.
 
     string date;
     cout << "Enter date to be searched\n";
     cin >> date;
-    if(Search(root,date) == true) cout << "Date Found\n";
-    else cout << "Date Not Found\n";
+    cout << "Corresponding Value is: " << Search(root,date);
+
 
 
 
