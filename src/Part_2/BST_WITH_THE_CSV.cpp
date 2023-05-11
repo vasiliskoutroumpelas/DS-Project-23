@@ -257,9 +257,6 @@ void preOrder(BstNode* node)
 }
 
 
-
-
-
 int main(){
 
     //system("clear");
@@ -299,6 +296,15 @@ int main(){
     cout << "Enter date to be searched\n";
     cin >> date;
     cout << "Corresponding Value is: " << Search(root,date) <<endl;
+
+
+
+//Code For Changing Value by Date
+
+
+
+//Code For Deleting struct of corresponding date
+
 
 
 
