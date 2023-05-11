@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 typedef struct record
 {
     string direction;
