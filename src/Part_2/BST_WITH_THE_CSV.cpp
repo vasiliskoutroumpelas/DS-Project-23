@@ -179,7 +179,7 @@ BstNode* Insert(BstNode* root, string date, long int value){
 
 int Search(BstNode* root, string date){
 
-    if(root == NULL) return false;
+    if(root == NULL) return -1;
     else if(date_to_int(root->date) == date_to_int(date)) return root->value;
     else if(date_to_int(date) <= date_to_int(root->date)) return Search(root->left,date);
     else return Search(root->right,date);
@@ -245,16 +245,19 @@ BstNode* makeBalancedTree(BstNode* root){
 }
 
 
+int changeValueByDate(BstNode* root, string date, int new_value){
 
-/* Function to do preorder traversal of tree */
-void preOrder(BstNode* node)
-{
-    if (node == NULL)
-        return;
-    printf("%d, %d ", node->date, node->value);
-    preOrder(node->left);
-    preOrder(node->right);
+  if(root == NULL) return -1;
+  else if(date_to_int(root->date) == date_to_int(date)){
+    root->value = new_value;
+    return root->value;         //to check if the change was successful or not
+  }
+  else if(date_to_int(date) <= date_to_int(root->date)) return changeValueByDate(root->left, date, new_value);
+  else return changeValueByDate(root->right, date, new_value);
+
 }
+
+
 
 
 int main(){
@@ -293,15 +296,26 @@ int main(){
 
 //Code For Searching by Date
 
-    string date;
-    cout << "Enter date to be searched\n";
-    cin >> date;
-    cout << "Corresponding Value is: " << Search(root,date) <<endl;
+  string date;
+  cout << "Enter date to be searched\n";
+  cin >> date;
+  if (Search(root,date) == -1) cout << "Empty tree." << endl;
+  else cout << "Corresponding Value is: " << Search(root,date) <<endl;
 
 
 
 //Code For Changing Value by Date
 
+  string Date;
+  cout << "Enter the Date whose Value you want to change: " << endl;
+  cin >> Date;
+  int new_value;
+  cout << "Enter the new Value: "<< endl;
+  cin >> new_value;
+  int result = changeValueByDate(root, date, new_value);
+
+  if(result == -1) cout << "Empty tree." << endl;
+  else cout << "Value " << result << " inserted succesfully." << endl;
 
 
 //Code For Deleting struct of corresponding date
