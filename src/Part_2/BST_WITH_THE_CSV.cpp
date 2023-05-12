@@ -25,7 +25,6 @@ void splitStringToRecordFields(stringstream &ss, Record& record);
 void insertDataToField(int fieldCounter, string token, Record& record);
 
 
-
 void csvToVector(ifstream &file, vector<Record> &data)
 {
     string line;
@@ -185,8 +184,6 @@ int Search(BstNode* root, string date){
 
 }
 
-
-
 /* Function to traverse the skewed binary tree in-order and
    store its node pointers in vector nodes[] */
 
@@ -212,11 +209,11 @@ void inOrder(BstNode* node, vector<BstNode*> &nodes)
 Binary Search Tree from a sorted vector */
 BstNode* sortedVectorToBST(vector<BstNode*> &nodes, int first, int last)
 {
-    /* Base Case */
+    // Base Case
     if (first > last)
         return NULL;
 
-    /* Get the middle element and make it root */
+    // Get the middle element and make it root
     int mid = (first + last) / 2;
     BstNode *root = nodes[mid];
 
@@ -248,7 +245,8 @@ int changeValueByDate(BstNode* root, string date, int new_value){
   if(root == NULL) return -1;
   else if(date_to_int(root->date) == date_to_int(date)){
     root->value = new_value;
-    return root->value;         //to check if the change was successful or not
+    return root->value;                       //to check if the change was successful or not
+
   }
   else if(date_to_int(date) <= date_to_int(root->date)) return changeValueByDate(root->left, date, new_value);
   else return changeValueByDate(root->right, date, new_value);
@@ -279,7 +277,7 @@ int main(){
 
     BstNode* root = NULL;   //Creating an empty tree
 
-    for(int i=0; i<data1.size(); i++){
+    for(int i=0; i<30; i++){
 
         root = Insert(root, data1.at(i).date, data1.at(i).value);
 
@@ -298,7 +296,7 @@ int main(){
   cout << "Enter date to be searched\n";
   cin >> date;
   if (Search(root,date) == -1) cout << "Empty tree." << endl;
-  else cout << "Corresponding Value is: " << Search(root,date) <<endl;
+  else cout << "Corresponding Value is: " << Search(root,date) << endl;
 
 
 
@@ -313,10 +311,23 @@ int main(){
   int result = changeValueByDate(root, date, new_value);
 
   if(result == -1) cout << "Empty tree." << endl;
-  else cout << "Value " << result << " inserted succesfully." << endl;
+  else cout << "Value " << result << " is now the new Value for Date " << Date << endl;
 
 
 //Code For Deleting struct of corresponding date
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
