@@ -345,11 +345,13 @@ int main(){
 
     BstNode* root = NULL;   //Creating an empty tree
 
-    for(int i=0; i<data1.size(); i++){
+    int n = data1.size()
+    for(int i=0; i<n; i++){                                                            //  for(Record element: data1){
 
-        root = Insert(root, data1.at(i).date, data1.at(i).value);
-
-    }
+        root = Insert(root, data1.at(i).date, data1.at(i).value);                      //          root = Insert(root, element.date, element.value);
+                                                                                        
+    }                                                                                  //  }
+   
 
 
 //Code For Inorder Traversal Representation
