@@ -46,6 +46,7 @@ void csvToVector(ifstream &file, vector<Record> &data)
         ss.str("");
         ss.clear();
     }
+
 }
 
 void splitStringToRecordFields(stringstream &ss, Record &record)
@@ -133,15 +134,12 @@ int date_to_int(string date)
 
 
 
-struct BstNode{
-
+typedef struct BstNode{
     string date;
     long int value;
     BstNode* left;
     BstNode* right;
-
-
-};
+}BstNode;
 
 
 BstNode* GetNewNode(string date, long int value){
@@ -151,7 +149,6 @@ BstNode* GetNewNode(string date, long int value){
     newNode->value = value;
     newNode->left = newNode -> right = NULL;
     return newNode;
-
 }
 
 
@@ -187,14 +184,14 @@ int Search(BstNode* root, string date){
 /* Function to traverse the skewed binary tree in-order and
    store its node pointers in vector nodes[] */
 
-void inOrder(BstNode* node, vector<BstNode*> &nodes)
+void inOrderRepr(BstNode* node, vector<BstNode*> &nodes)
 {
     if (node == NULL){
         return;
     }
-    inOrder(node->left, nodes);
+    inOrderRepr(node->left, nodes);
     nodes.push_back(node);
-    inOrder(node->right, nodes);
+    inOrderRepr(node->right, nodes);
 
 
     for(int i=0; i<nodes.size(); i++){                                     //Code For Inorder Traversal Representation (start)
@@ -203,6 +200,22 @@ void inOrder(BstNode* node, vector<BstNode*> &nodes)
 
     }                                                                     //Code For Inorder Traversal Representation (end)
 }
+
+
+
+/* Function to traverse the skewed binary tree in-order and
+   store its node pointers in vector nodes[] AND ALSO PRINT THE ELEMENTS OF THAT VECTOR  */
+
+void inOrder(BstNode* node, vector<BstNode*> &nodes)
+{
+    if (node == NULL){
+        return;
+    }
+    inOrder(node->left, nodes);
+    nodes.push_back(node);
+    inOrder(node->right, nodes);
+}
+
 
 
 /* A function that constructs Balanced
@@ -240,6 +253,7 @@ BstNode* makeBalancedTree(BstNode* root){
 }
 
 
+
 int changeValueByDate(BstNode* root, string date, int new_value){
 
   if(root == NULL) return -1;
@@ -254,6 +268,61 @@ int changeValueByDate(BstNode* root, string date, int new_value){
 }
 
 
+
+BstNode* deleteByDate(BstNode* root, string date){
+
+    // Base Case
+    if(root == NULL) return root;
+
+    if(date_to_int(date) < date_to_int(root->date)) return deleteByDate(root->left, date);
+
+    else if(date_to_int(date) > date_to_int(root->date)) return deleteByDate(root->right, date);
+
+    else if (date_to_int(root->date) == date_to_int(date)){
+
+          // case 1: node to be deleted has no children (aka is a leaf node)
+          if (root->left == NULL && root->right == NULL){
+            return NULL;
+          }
+          // case 2: node to be deleted has one right child (or no child)
+          else if(root->left == NULL){
+            BstNode* temp = root->right;
+            delete root;
+            return temp;
+          }
+
+          // case 3: node to be deleted has one left child (or no child)
+          else if (root->right == NULL){
+            BstNode * temp = root->left;
+            delete root;
+            return temp;
+          }
+
+
+          // case 4:  node to be deleted has two children
+          else {
+
+            // find the minimum value in the right subtree
+            BstNode* min_right_subtree ;
+            BstNode* current = root->right;
+            while (current->left != NULL)
+            {
+              current = current->left;
+            }
+            min_right_subtree = current;
+
+            // switch the values
+            root->date = min_right_subtree->date;
+            root->value = min_right_subtree->value;
+
+            // Delete the node, with the corresponding date the user entered, now as a leaf node
+            root->right = deleteByDate(root->right, min_right_subtree->date);
+          }
+
+
+    }
+    return root;
+}
 
 
 int main(){
@@ -274,10 +343,9 @@ int main(){
 
 
 
-
     BstNode* root = NULL;   //Creating an empty tree
 
-    for(int i=0; i<30; i++){
+    for(int i=0; i<6; i++){
 
         root = Insert(root, data1.at(i).date, data1.at(i).value);
 
@@ -289,13 +357,15 @@ int main(){
   cout << "Inorder Traversal Represantation is: " << endl;
   cout<< "Date       |     Value" << endl << endl;
   root = makeBalancedTree(root);
+  vector<BstNode*> sortednodes;
+  inOrderRepr(root, sortednodes);
 
 //Code For Searching by Date
 
   string date;
   cout << "Enter date to be searched\n";
   cin >> date;
-  if (Search(root,date) == -1) cout << "Empty tree." << endl;
+  if (Search(root,date) == -1) cout << "Empty tree or Date Not Found." << endl;
   else cout << "Corresponding Value is: " << Search(root,date) << endl;
 
 
@@ -308,29 +378,30 @@ int main(){
   int new_value;
   cout << "Enter the new Value: "<< endl;
   cin >> new_value;
-  int result = changeValueByDate(root, date, new_value);
+  int result1 = changeValueByDate(root, date, new_value);
 
-  if(result == -1) cout << "Empty tree." << endl;
-  else cout << "Value " << result << " is now the new Value for Date " << Date << endl;
+  if(result1 == -1) cout << "Empty tree or Date Not Found." << endl;
+  else cout << "Value " << result1 << " is now the new Value for Date " << Date << endl;
 
 
 //Code For Deleting struct of corresponding date
 
+string Date2;          // i name it that way to be different from 'date' and 'Date' string variables above
+cout << "Enter the Date of the entry you want to delete: " << endl;
+cin >> Date2;
+root = deleteByDate(root, Date2);
+
+// rebalancing the BST after deletion
+root = makeBalancedTree(root);
+cout << "Entry with Date " << Date2 << " has been successfully deleted." << endl << endl;
+
+// Doing Inorder Traversal to see the resulted balanced BST after deletion
+cout << "InOrder Traversal After Deletion: " << endl;
+vector<BstNode*> nodes;
+inOrderRepr(root, nodes);
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    return 0;
+return 0;
 }
