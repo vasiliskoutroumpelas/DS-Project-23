@@ -17,17 +17,14 @@ typedef struct record
     long int cumulative;
 } Record;
 
-// sioutas slides
 void mergeValues(vector<Record> &data, int left, int middle, int right);
 void mergeSortValues(vector<Record> &data, int left, int right);
 
-// tsakalidis and internet
 int findMaxValue(vector<Record> &array);
 void countingSortValues(vector<Record> &array, int range);
 
 bool areSortedValues(vector<Record> &vector);
 
-// original
 void csvToVector(ifstream &file, vector<Record> &Data);
 void splitStringToRecordFields(stringstream &ss, Record& record);
 void insertDataToField(int fieldCounter, string token, Record& record);

@@ -1,0 +1,18 @@
+Άσκηση 1
+Counting Sort: Βιβλίο κ.Τσακαλίδη σελ. 58, 2.3.1 Ταξινόμηση με μέτρηση (Counting Sort)
+Merge Sort: Διαφάνειες κ.Σιούτα 3.bubble-mergesort.ppt, slide 152
+
+Άσκηση 2
+Heap Sort: Βιβλίο κ.Τσακαλίδη σελ. 43, 2.1.3 Ταξινόμηση Σωρού (Heap Sort)
+Quick Sort: Διαφάνειες κ.Σιούτα 6.quicksort.ppt, 
+
+Άσκηση 3
+Binary Search: Διαφάνειες κ.Σιούτα 8.searching.pptx, slide 8, binary_rec
+Interpolation Search: Διαφάνειες κ.Σιούτα 8.searching.pptx, slide 12
+
+Άσκηση 4
+Binary Interpolation Search: Διαφάνειες κ.Σιούτα 8.searching.pptx, slide 15
+Binary Interpolation Search Improved: Βιβλίο κ.Τσακαλίδη σελ. 82, 4.4.1 Βελτίωση του Χρόνου Χειρότερης Περίπτωσης
+
+Βοηθητικές Συναρτήσεις
+bool isValidDate(string date): Ιστοσελίδα Geeks for geeks https://www.geeksforgeeks.org/program-check-date-valid-not/

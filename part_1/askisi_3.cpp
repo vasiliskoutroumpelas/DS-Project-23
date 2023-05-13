@@ -20,7 +20,7 @@ typedef struct record
 int binarySearch(vector<Record> &array, int key, int indexMin, int indexMax);
 int interpolationSearch(vector<Record> &data, int key, int low, int high);
 int date_to_int(string date);
-bool isValidDate(string date); // source: https://www.geeksforgeeks.org/program-check-date-valid-not/
+bool isValidDate(string date);
 void printResultsOfSearch(vector<Record> &data, int index);
 
 void quickSortDates(vector<Record> &data, int left, int right);
@@ -157,7 +157,6 @@ int date_to_int(string date)
     return (10000 * year + 100 * month + day);
 }
 
-// source: https://www.geeksforgeeks.org/program-check-date-valid-not/
 bool isValidDate(string date)
 {
     stringstream ss(date);
