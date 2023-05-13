@@ -119,8 +119,8 @@ int binaryInterpolationSearchDates(vector<Record> &data, int key, int left, int 
         {
             while (key > date_to_int(data[next - i * floor(sqrt(size)) + 1].date))
                 i++;
-            right = next + (i - 1) * floor(sqrt(size));
-            left = next + i * floor(sqrt(size));
+            right = next - (i - 1) * floor(sqrt(size));
+            left = next - i * floor(sqrt(size));
         }
         size = right - left + 1;
         next = left + ceil((size) * (key - date_to_int(data[left].date)) / (date_to_int(data[right].date) - date_to_int(data[left].date)));
