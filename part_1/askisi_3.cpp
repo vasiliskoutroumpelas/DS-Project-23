@@ -20,7 +20,7 @@ typedef struct record
 int binarySearch(vector<Record> &array, int key, int indexMin, int indexMax);
 int interpolationSearch(vector<Record> &data, int key, int low, int high);
 int date_to_int(string date);
-bool isValidDate(string date); // source: https://www.geeksforgeeks.org/program-check-date-valid-not/
+bool isValidDate(string date);
 void printResultsOfSearch(vector<Record> &data, int index);
 
 void quickSortDates(vector<Record> &data, int left, int right);
@@ -70,7 +70,7 @@ int main()
     cout << "Took " << duration1.count() << " microseconds" << endl
          << endl;
     ;
-    // printResultsOfSearch(data, index1);
+    printResultsOfSearch(data, index1);
 
     cout << endl;
 
@@ -84,7 +84,7 @@ int main()
     cout << "Interpolation Search:" << endl;
     cout << "Took " << duration2.count() << " microseconds" << endl
          << endl;
-    // printResultsOfSearch(data, index2);
+    printResultsOfSearch(data, index2);
 
     return 0;
 }
@@ -157,7 +157,6 @@ int date_to_int(string date)
     return (10000 * year + 100 * month + day);
 }
 
-// source: https://www.geeksforgeeks.org/program-check-date-valid-not/
 bool isValidDate(string date)
 {
     stringstream ss(date);
@@ -214,6 +213,7 @@ void printResultsOfSearch(vector<Record> &data, int index)
         int i = index;
         while (i >= 0 && date_to_int(data[index].date) == date_to_int(data[i].date))
         {
+            cout << "For date " << data[i].date << " in index " << i << " of sorted dates:" << endl; 
             cout << "Value is equal to: " << data[i].value << endl;
             cout << "Cumulative is equal to: " << data[i].cumulative << endl;
             cout << endl;
@@ -223,6 +223,7 @@ void printResultsOfSearch(vector<Record> &data, int index)
         i = index;
         while (i < data.size() && date_to_int(data[index].date) == date_to_int(data[i].date))
         {
+            cout << "For date " << data[i].date << " in index " << i << " of sorted dates:" << endl; 
             cout << "Value is equal to: " << data[i].value << endl;
             cout << "Cumulative is equal to: " << data[i].cumulative << endl;
             cout << endl;

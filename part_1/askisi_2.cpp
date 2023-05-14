@@ -17,15 +17,13 @@ typedef struct record
     long int cumulative;
 } Record;
 
-// tsakalidis book + renaming (original)
+
 void heapSortCumulatives(vector<Record> &data, int size);
 
-// sioutas slides
 void quickSortCumulatives(vector<Record> &data, int left, int right);
 
 bool areSortedCumulatives(vector<Record> &vector);
 
-// original
 void csvToVector(ifstream &file, vector<Record> &data);
 void splitStringToRecordFields(stringstream &ss, Record &record);
 void insertDataToField(int fieldCounter, string token, Record& record);

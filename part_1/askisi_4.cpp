@@ -20,7 +20,7 @@ typedef struct record
 int binaryInterpolationSearchDates(vector<Record> &data, int key, int left, int right);
 int binaryInterpolationSearchDatesImproved(vector<Record> &data, int key, int left, int right);
 int date_to_int(string date);
-bool isValidDate(string date); // source: https://www.geeksforgeeks.org/program-check-date-valid-not/
+bool isValidDate(string date);
 void printResultsOfSearch(vector<Record> &data, int index);
 
 void quickSortDates(vector<Record> &data, int left, int right);
@@ -119,9 +119,19 @@ int binaryInterpolationSearchDates(vector<Record> &data, int key, int left, int 
         {
             while (key > date_to_int(data[next - i * floor(sqrt(size)) + 1].date))
                 i++;
-            right = next + (i - 1) * floor(sqrt(size));
-            left = next + i * floor(sqrt(size));
+            right = next - (i - 1) * floor(sqrt(size));
+            left = next - i * floor(sqrt(size));
         }
+        
+        /*
+        if right and left date are the same then the division that will be calculated 
+        below ("next" variable) will be a division by 0
+        */ 
+        while (date_to_int(data[right].date) == date_to_int(data[left].date))
+        {
+            right++;
+        }
+
         size = right - left + 1;
         next = left + ceil((size) * (key - date_to_int(data[left].date)) / (date_to_int(data[right].date) - date_to_int(data[left].date)));
     }
@@ -169,6 +179,15 @@ int binaryInterpolationSearchDatesImproved(vector<Record> &data, int key, int le
         }
         size = right - left + 1;
         next = left + ceil((size) * (key - date_to_int(data[left].date)) / (date_to_int(data[right].date) - date_to_int(data[left].date)));
+
+                /*
+        if right and left date are the same then the division that will be calculated 
+        below ("next" variable) will be a division by 0
+        */ 
+        while (date_to_int(data[right].date) == date_to_int(data[left].date))
+        {
+            right++;
+        }
     }
     if (key == date_to_int(data[next].date))
     {
@@ -200,7 +219,6 @@ int date_to_int(string date)
     return (10000 * year + 100 * month + day);
 }
 
-// source: https://www.geeksforgeeks.org/program-check-date-valid-not/
 bool isValidDate(string date)
 {
     stringstream ss(date);
@@ -257,6 +275,7 @@ void printResultsOfSearch(vector<Record> &data, int index)
         int i = index;
         while (i >= 0 && date_to_int(data[index].date) == date_to_int(data[i].date))
         {
+            cout << "For date " << data[i].date << " in index " << i << " of sorted dates:" << endl; 
             cout << "Value is equal to: " << data[i].value << endl;
             cout << "Cumulative is equal to: " << data[i].cumulative << endl;
             cout << endl;
@@ -266,6 +285,7 @@ void printResultsOfSearch(vector<Record> &data, int index)
         i = index;
         while (i < data.size() && date_to_int(data[index].date) == date_to_int(data[i].date))
         {
+            cout << "For date " << data[i].date << " in index " << i << " of sorted dates:" << endl; 
             cout << "Value is equal to: " << data[i].value << endl;
             cout << "Cumulative is equal to: " << data[i].cumulative << endl;
             cout << endl;
@@ -395,10 +415,10 @@ void insertDataToField(int fieldCounter, string token, Record &record)
         record.measure = token;
         break;
     case 8:
-        record.value = stol(token);
+        record.value = stoll(token);
         break;
     case 9:
-        record.cumulative = stol(token);
+        record.cumulative = stoll(token);
         break;
     default:
         break;
