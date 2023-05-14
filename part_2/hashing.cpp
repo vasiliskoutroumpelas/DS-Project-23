@@ -29,10 +29,10 @@ typedef struct node
    node* next=NULL;
    node* previous=NULL;
    node* head;
-   string data;
+   Record data;
 } Node;
 
-void pushHash(vector<Node*> &table, int hashValue, string data){
+void pushHash(vector<Node*> &table, int hashValue, Record data){
    Node* firstNode=table.at(hashValue);
    Node* currentNode;
    
@@ -75,7 +75,7 @@ cout<<"FINAL"<<endl;
             cout<<"i="<<i<<endl;
             while(temp) {
                 
-                cout<<(*temp).data<<"-->";
+                cout<<(*temp).data.date<<"-->";
                 temp=(*temp).next;
                 
             }
@@ -97,7 +97,8 @@ void searchHash(vector<Node*> T, string inputDate){
         temp=T.at(Hx);
 
          while(temp) {
-                if((*temp).data==inputDate){
+                if((*temp).data.date==inputDate){
+                    cout<<(recordCounter+1)<<"-->"<<(*temp).data.value<<endl;
                     recordCounter++;
                     
                 }
@@ -134,7 +135,7 @@ vector<Node*> hashing(vector<Record> &data)
         Hx=(data[i].date[0]+data[i].date[1]+data[i].date[2]+data[i].date[3]+data[i].date[4]+data[i].date[5]+data[i].date[6]+data[i].date[7]+data[i].date[8]+data[i].date[9])%11;
         
        // cout<<i<<"\t"<<Hx<<"\t"<<data[i].date<<endl;
-        pushHash(T, Hx, data[i].date);
+        pushHash(T, Hx, data[i]);
        //cout<<Hx<<endl;
     }
     
