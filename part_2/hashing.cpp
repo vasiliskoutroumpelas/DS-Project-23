@@ -17,15 +17,6 @@ typedef struct record
     long int cumulative;
 } Record;
 
-// sioutas slides
-void mergeValues(vector<Record> &data, int left, int middle, int right);
-void mergeSortValues(vector<Record> &data, int left, int right);
-
-// tsakalidis and internet
-int findMaxValue(vector<Record> &array);
-void countingSortValues(vector<Record> &array, int range);
-
-bool areSortedValues(vector<Record> &vector);
 
 // original
 void csvToVector(ifstream &file, vector<Record> &Data);
@@ -38,10 +29,10 @@ typedef struct node
    node* next=NULL;
    node* previous=NULL;
    node* head;
-   int data;
+   string data;
 } Node;
 
-void pushHash(vector<Node*> &table, int hashValue, int initValue){
+void pushHash(vector<Node*> &table, int hashValue, string data){
    Node* firstNode=table.at(hashValue);
    Node* currentNode;
    
@@ -65,11 +56,63 @@ void pushHash(vector<Node*> &table, int hashValue, int initValue){
         (*firstNode).head=currentNode;
     
 
-    (*currentNode).data=initValue;
+    (*currentNode).data=data;
    
 }
 
-void hashing(vector<Record> &data)
+void printHash(vector<Node*> T){
+       
+Node* temp;
+
+cout<<"FINAL"<<endl;
+    for (int i = 0; i < T.size(); i++)
+    {
+       
+        temp=T[i];
+
+        if(temp) 
+        {   
+            cout<<"i="<<i<<endl;
+            while(temp) {
+                
+                cout<<(*temp).data<<"-->";
+                temp=(*temp).next;
+                
+            }
+        cout<<endl;
+        }
+          
+        
+    }
+    
+
+}
+
+void searchHash(vector<Node*> T, string inputDate){
+    int Hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
+    Node* temp;
+    int recordCounter=0;
+    if(Hx<=T.size()){
+
+        temp=T.at(Hx);
+
+         while(temp) {
+                if((*temp).data==inputDate){
+                    recordCounter++;
+                    
+                }
+                temp=(*temp).next;
+                
+            }
+        if(recordCounter!=0 )cout<<"Date Found in Table "<<recordCounter<<" time(s)!"<<endl;
+        else cout<<"Error 404: Date not Found"<<endl;
+    }
+
+
+
+}
+
+vector<Node*> hashing(vector<Record> &data)
 {
     
     int m_hashTableSize =data.size()*0.75;
@@ -86,72 +129,49 @@ void hashing(vector<Record> &data)
 
     for (int i = 0; i < data.size(); i++)
     {
-        Hx=data[i].date[0]+data[i].date[1]+data[i].date[2]+data[i].date[3]+data[i].date[4]+data[i].date[5]+data[i].date[6]+data[i].date[7]+data[i].date[8]+data[i].date[9];
-        cout<<Hx<<endl;
+        //cout<<data[i].date<<endl;
+        
+        Hx=(data[i].date[0]+data[i].date[1]+data[i].date[2]+data[i].date[3]+data[i].date[4]+data[i].date[5]+data[i].date[6]+data[i].date[7]+data[i].date[8]+data[i].date[9])%11;
+        
+       // cout<<i<<"\t"<<Hx<<"\t"<<data[i].date<<endl;
+        pushHash(T, Hx, data[i].date);
+       //cout<<Hx<<endl;
     }
     
-
+     return T;
 }
+
 
 
 int main()
 {
    // system("clear");
     
-    // ifstream file("data.csv");
-    // if (!file.good())
-    // {
-    //     cout << "error" << endl;
-    //     return -1;
-    // }
-
-    // vector<Record> data1, data2;
-    // csvToVector(file, data1);
-    // data2 = data1;
-
-    // hashing(data2);
-
-    vector<Node*>table(3);
-    int S[]={1, 3, 4, 7, 10, 17, 21};
-    int hx[]={1,0,1,1,1,2,0};
-
-
-    for (int i = 0; i < 7; i++)
-   {
-        cout<<S[i]<<"\t";
-   }
-   cout<<endl;
-   for (int i = 0; i < 7; i++)
-   {
-     cout<<hx[i]<<"\t";
-   }
-   cout<<endl;
-
-
-    for (int i = 0; i < 7; i++)
+    ifstream file("data.csv");
+    if (!file.good())
     {
-        pushHash(table, hx[i], S[i]);
+        cout << "error" << endl;
+        return -1;
     }
-    
-Node* temp;
 
-cout<<"FINAL"<<endl;
-    for (int i = 0; i < table.size(); i++)
-    {
-        cout<<"i="<<i<<endl;
-        temp=table[i];
+    vector<Record> data1, data2;
+    csvToVector(file, data1);
+    data2 = data1;
 
 
-        cout<<(*temp).data<<"\t";
-        do{
-            temp=(*temp).next;
-            cout<<(*temp).data<<"\t";
-            
-        }while((*temp).next);
-        cout<<endl;
-    }
+    vector<Node*> T;
+    T=hashing(data2);
+
+    cout<<"Search Date: 14/12/2021"<<endl;
+    searchHash(T, "14/12/2021");
+
+    cout<<"Search Date: 14/12/2023"<<endl;
+    searchHash(T, "14/12/2023");
+   // printHash(T);
     
 
+   
+ 
 
     return 0;
 }
