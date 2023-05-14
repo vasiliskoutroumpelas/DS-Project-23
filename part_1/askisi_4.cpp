@@ -122,6 +122,16 @@ int binaryInterpolationSearchDates(vector<Record> &data, int key, int left, int 
             right = next - (i - 1) * floor(sqrt(size));
             left = next - i * floor(sqrt(size));
         }
+        
+        /*
+        if right and left date are the same then the division that will be calculated 
+        below ("next" variable) will be a division by 0
+        */ 
+        while (date_to_int(data[right].date) == date_to_int(data[left].date))
+        {
+            right++;
+        }
+
         size = right - left + 1;
         next = left + ceil((size) * (key - date_to_int(data[left].date)) / (date_to_int(data[right].date) - date_to_int(data[left].date)));
     }
@@ -169,6 +179,15 @@ int binaryInterpolationSearchDatesImproved(vector<Record> &data, int key, int le
         }
         size = right - left + 1;
         next = left + ceil((size) * (key - date_to_int(data[left].date)) / (date_to_int(data[right].date) - date_to_int(data[left].date)));
+
+                /*
+        if right and left date are the same then the division that will be calculated 
+        below ("next" variable) will be a division by 0
+        */ 
+        while (date_to_int(data[right].date) == date_to_int(data[left].date))
+        {
+            right++;
+        }
     }
     if (key == date_to_int(data[next].date))
     {
@@ -396,10 +415,10 @@ void insertDataToField(int fieldCounter, string token, Record &record)
         record.measure = token;
         break;
     case 8:
-        record.value = stol(token);
+        record.value = stoll(token);
         break;
     case 9:
-        record.cumulative = stol(token);
+        record.cumulative = stoll(token);
         break;
     default:
         break;
