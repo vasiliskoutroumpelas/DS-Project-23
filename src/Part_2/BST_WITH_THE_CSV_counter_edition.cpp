@@ -357,7 +357,7 @@ int main(){
 
     BstNode* root = NULL;   //Creating an empty tree
                                                                             //  for(Record element: data1){
-      for(int i=0; i<10; i++){
+      for(int i=0; i<data1.size(); i++){
                                                                             //      root = Insert(root, element.date, element.value);
           root = Insert(root, data1.at(i).date, data1.at(i).value);
       }                                                                      //  }
