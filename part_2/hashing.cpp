@@ -60,15 +60,15 @@ void pushHash(vector<Node*> &table, int hashValue, Record data){
    
 }
 
-void printHash(vector<Node*> T){
+void printHash(vector<Node*> hashTable){
        
 Node* temp;
 
 cout<<"FINAL"<<endl;
-    for (int i = 0; i < T.size(); i++)
+    for (int i = 0; i < hashTable.size(); i++)
     {
        
-        temp=T[i];
+        temp=hashTable[i];
 
         if(temp) 
         {   
@@ -88,13 +88,13 @@ cout<<"FINAL"<<endl;
 
 }
 
-void searchHash(vector<Node*> T, string inputDate){
-    int Hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
+void searchHash(vector<Node*> hashTable, string inputDate){
+    int hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
     Node* temp;
     int recordCounter=0;
-    if(Hx<=T.size()){
+    if(hx<=hashTable.size()){
 
-        temp=T.at(Hx);
+        temp=hashTable.at(hx);
 
          while(temp) {
                 if((*temp).data.date==inputDate){
@@ -117,11 +117,11 @@ vector<Node*> hashing(vector<Record> &data)
 {
     
     int m_hashTableSize =data.size()*0.75;
-    int Hx;
-    vector<Node*> T(m_hashTableSize);
+    int hx;
+    vector<Node*> hashTable(m_hashTableSize);
     
    
-    cout<<T.size()<<endl;
+    cout<<hashTable.size()<<endl;
     
     cout<<data.size()<<endl<<m_hashTableSize<<endl;
 
@@ -132,14 +132,14 @@ vector<Node*> hashing(vector<Record> &data)
     {
         //cout<<data[i].date<<endl;
         
-        Hx=(data[i].date[0]+data[i].date[1]+data[i].date[2]+data[i].date[3]+data[i].date[4]+data[i].date[5]+data[i].date[6]+data[i].date[7]+data[i].date[8]+data[i].date[9])%11;
+        hx=(data[i].date[0]+data[i].date[1]+data[i].date[2]+data[i].date[3]+data[i].date[4]+data[i].date[5]+data[i].date[6]+data[i].date[7]+data[i].date[8]+data[i].date[9])%11;
         
        // cout<<i<<"\t"<<Hx<<"\t"<<data[i].date<<endl;
-        pushHash(T, Hx, data[i]);
+        pushHash(hashTable, hx, data[i]);
        //cout<<Hx<<endl;
     }
     
-     return T;
+     return hashTable;
 }
 
 
