@@ -256,6 +256,7 @@ void printResultsOfSearch(vector<Record> &data, int index)
         int i = index;
         while (i >= 0 && date_to_int(data[index].date) == date_to_int(data[i].date))
         {
+            cout << "For date " << data[i].date << " in index " << i << " of sorted dates:" << endl; 
             cout << "Value is equal to: " << data[i].value << endl;
             cout << "Cumulative is equal to: " << data[i].cumulative << endl;
             cout << endl;
@@ -265,6 +266,7 @@ void printResultsOfSearch(vector<Record> &data, int index)
         i = index;
         while (i < data.size() && date_to_int(data[index].date) == date_to_int(data[i].date))
         {
+            cout << "For date " << data[i].date << " in index " << i << " of sorted dates:" << endl; 
             cout << "Value is equal to: " << data[i].value << endl;
             cout << "Cumulative is equal to: " << data[i].cumulative << endl;
             cout << endl;
