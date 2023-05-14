@@ -275,9 +275,9 @@ BstNode* deleteByDate(BstNode* root, string date){
     // Base Case
     if(root == NULL) return root;
 
-    if(date_to_int(date) < date_to_int(root->date)) return deleteByDate(root->left, date);
+    if(date_to_int(date) < date_to_int(root->date)) root->left = deleteByDate(root->left, date);
 
-    else if(date_to_int(date) > date_to_int(root->date)) return deleteByDate(root->right, date);
+    else if(date_to_int(date) > date_to_int(root->date)) root->right = deleteByDate(root->right, date);
 
 
     // Case: Date is same as root's date
@@ -357,7 +357,7 @@ int main(){
 
     BstNode* root = NULL;   //Creating an empty tree
                                                                             //  for(Record element: data1){
-      for(int i=0; i<data1.size(); i++){
+      for(int i=0; i<10; i++){
                                                                             //      root = Insert(root, element.date, element.value);
           root = Insert(root, data1.at(i).date, data1.at(i).value);
       }                                                                      //  }
@@ -395,6 +395,8 @@ int main(){
 
   if(result1 == -1) cout << "Empty tree or Date Not Found." << endl;
   else cout << "Value " << result1 << " is now the new Value for Date " << Date << endl;
+  vector<BstNode*> nodes1;
+  inOrderRepr(root, nodes1); // for the user to see the actual change
 
 
 //Code For Deleting struct of corresponding date
@@ -410,9 +412,8 @@ cout << "Entry with Date " << Date2 << " has been successfully deleted." << endl
 
 // Doing Inorder Traversal to see the resulted balanced BST after deletion
 cout << "InOrder Traversal After Deletion: " << endl;
-vector<BstNode*> nodes;
-inOrderRepr(root, nodes);
-
+vector<BstNode*> nodes2;
+inOrderRepr(root, nodes2);
 
 
 
