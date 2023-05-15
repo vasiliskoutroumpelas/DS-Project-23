@@ -24,6 +24,19 @@ void splitStringToRecordFields(stringstream &ss, Record& record);
 void insertDataToField(int fieldCounter, string token, Record& record);
 
 
+void printRecord(Record rec){
+    cout<<"|Direction: "<<rec.direction<<endl;
+    cout<<"|Year: "<<rec.year<<endl;
+    cout<<"|Date: "<<rec.date<<endl;
+    cout<<"|Weekday: "<<rec.weekday<<endl;
+    cout<<"|Country: "<<rec.country<<endl;
+    cout<<"|Commodity: "<<rec.commodity<<endl;
+    cout<<"|Transport Mode: "<<rec.transport_mode<<endl;
+    cout<<"|Measure: "<<rec.measure<<endl;
+    cout<<"|Value: "<<rec.value<<endl;
+    cout<<"|Cumulative: "<<rec.cumulative<<endl<<endl;;
+}
+
 typedef struct node
 {
    node* next=NULL;
@@ -35,12 +48,8 @@ typedef struct node
 void pushHash(vector<Node*> &table, int hashValue, Record data){
    Node* firstNode=table.at(hashValue);
    Node* currentNode;
-   
-   
 
 //first element knows the last
-
-   
 
     if(!firstNode){
         table.at(hashValue)=new Node;
@@ -119,14 +128,10 @@ vector<Node*> hashing(vector<Record> &data)
     int m_hashTableSize =data.size()*0.75;
     int hx;
     vector<Node*> hashTable(m_hashTableSize);
+      
+    // cout<<hashTable.size()<<endl;
     
-   
-    cout<<hashTable.size()<<endl;
-    
-    cout<<data.size()<<endl<<m_hashTableSize<<endl;
-
-   
-
+    // cout<<data.size()<<endl<<m_hashTableSize<<endl;
 
     for (int i = 0; i < data.size(); i++)
     {
@@ -183,6 +188,80 @@ void deleteHashNode(vector<Node*> &hashTable, string inputDate){
     }
 }
 
+
+void editHashNode(vector<Node*> &hashTable, string inputDate, long int newValue){
+       int hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
+    Node* temp;
+    
+    if(hx<=hashTable.size()){
+
+        temp=hashTable.at(hx);
+        if(temp){
+            while((*temp).data.date!=inputDate){
+                temp=(*temp).next;
+            }
+
+            cout<<"~Old Record: ~"<<endl;
+            printRecord((*temp).data);
+
+            (*temp).data.value=newValue;
+
+             cout<<"~New Record: ~"<<endl;;
+            printRecord((*temp).data);
+        }else{
+            cout<<"ERROR: The list you want to search on is empty..."<<endl;
+        }
+    }
+}
+
+
+void menu(vector<Node*> &hashTable){
+    int option=0;
+    string tempString;
+    long int tempVal;
+
+    while(true){
+        
+            system("CLS");
+            cout<<"~MENU~"<<endl;
+            cout<<"(1) Search Date"<<endl<<"(2) Edit Record"<<endl<<"(3) Delete Node"<<endl<<"(4) Exit"<<endl;
+            cout<<"--> ";
+
+            //get only int
+            //std::cin.clear();
+        // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        cin>>option;
+        if(option>4 || option<1 || !cin){      
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+           
+            continue;
+        }else break;
+    }
+
+
+    system("CLS");
+
+    switch (option)
+    {
+    //search
+    case 1:{ cout<<"--SEARCH--"<<endl<<"Enter Date to Search (DD/MM/YY): "; cin>>tempString; system("CLS"); searchHash(hashTable, tempString); break;}
+    //edit
+    case 2:{ cout<<"--EDIT--"<<endl<<"Enter Date to Edit (DD/MM/YY): "; cin>>tempString; cout<<"Enter the New Value: "; cin>>tempVal; system("CLS"); editHashNode(hashTable, tempString, tempVal); break;}
+    //delete
+    case 3:{cout<<"--DELETE--"<<endl<<"Enter Date to Delete (DD/MM/YY): "; cin>>tempString;  system("CLS"); cout<<"~BEFORE~"<<endl; searchHash(hashTable, tempString); cout<<endl<<endl; deleteHashNode(hashTable, tempString); cout<<"~AFTER~"<<endl; searchHash(hashTable, tempString); break;}
+    //exit
+    case 4:{ cout<<"Exiting..."<<endl; exit(0); break;}
+    
+    default:
+        break;
+    }
+
+}
+
+
+
 int main()
 {
    // system("clear");
@@ -201,6 +280,12 @@ int main()
 
     vector<Node*> hashTable;
     hashTable=hashing(data2);
+
+
+
+    menu(hashTable);
+
+
 
 
     /*example: 
@@ -226,7 +311,18 @@ int main()
         
     */
 
+
+    /*example:
+    -searches the specific date
+    -prints the current record
+    -changes the value of the record
+    -prints the edited record
+
+        editHashNode(hashTable, "14/12/2021", 123456);
+
+    */
    
+
     //printHash(T);
 
     return 0;
