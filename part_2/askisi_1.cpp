@@ -70,6 +70,7 @@ int main()
     {
         // root = insert(root, element.date, element.value);
         root = insert(root, data1.at(i));
+        root = makeBalancedTree(root);
     }
 
     int choice=0;
@@ -127,7 +128,7 @@ BstNode* getNewNode(Record element)
     BstNode *newNode = new BstNode();
     newNode->element = element;
     newNode->left = newNode->right = NULL;
-    newNode->count = 1; // set counter for same dates as 1
+    newNode->count = 0; // set counter for same dates as 1
     return newNode;
 }
 
@@ -334,7 +335,6 @@ BstNode* printInOrder(BstNode *root)
 
     cout << "Inorder Traversal Represantation is: " << endl;
     cout << "Date       |     Value" << endl << endl;
-    root = makeBalancedTree(root);
     vector<BstNode *> sortednodes;
     inOrderRepr(root, sortednodes);
     return root;
