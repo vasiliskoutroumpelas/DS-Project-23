@@ -27,7 +27,7 @@ void insertDataToField(int fieldCounter, string token, Record& record);
 typedef struct node
 {
    node* next=NULL;
-   node* previous=NULL;
+  // node* previous=NULL;
    node* head;
    Record data;
 } Node;
@@ -142,7 +142,46 @@ vector<Node*> hashing(vector<Record> &data)
      return hashTable;
 }
 
+void deleteHashNode(vector<Node*> &hashTable, string inputDate){
+       int hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
+    Node* temp;
+    Node* prev;
 
+
+
+    if(hx<=hashTable.size()){
+
+        temp=prev=hashTable.at(hx);
+        if(temp){
+
+            //search element is also the first element
+            if((*temp).data.date==inputDate) {
+                //in case this list has more than one elements
+                if((*hashTable.at(hx)).next) hashTable.at(hx)=(*hashTable.at(hx)).next;
+                free(temp);
+            }
+
+            //search element is not the first element
+            else{
+                while((*temp).data.date!=inputDate) { 
+                        prev=temp;
+                        temp=(*temp).next;
+                    }
+
+                //if temp is out of the list
+                if(!temp){
+                    (*prev).next=NULL;
+                    free(temp);
+                }
+                //delete element in the middle of the list
+                else{
+                    (*prev).next=(*temp).next;
+                    free(temp);
+                }
+            }
+        }
+    }
+}
 
 int main()
 {
@@ -160,19 +199,35 @@ int main()
     data2 = data1;
 
 
-    vector<Node*> T;
-    T=hashing(data2);
+    vector<Node*> hashTable;
+    hashTable=hashing(data2);
 
-    cout<<"Search Date: 14/12/2021"<<endl;
-    searchHash(T, "14/12/2021");
 
-    cout<<"Search Date: 14/12/2023"<<endl;
-    searchHash(T, "14/12/2023");
-   // printHash(T);
-    
+    /*example: 
+    -searches the specific date
+    -find 44 elements
+    -deletes the first know elemement that corresponds to the date
+    -executes search again and finds 43 elements
+
+        cout<<"Search Date: 14/12/2021"<<endl;
+        searchHash(hashTable, "14/12/2021");
+        deleteHashNode(hashTable, "14/12/2021");
+        searchHash(hashTable, "14/12/2021");
+    */
+
+
+   /*example:
+   -searches the specific date
+   -date does not exist
+   -prints error
+
+        cout<<"Search Date: 14/12/2023"<<endl;
+        searchHash(T, "14/12/2023");
+        
+    */
 
    
- 
+    //printHash(T);
 
     return 0;
 }
