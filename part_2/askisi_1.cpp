@@ -125,7 +125,6 @@ BstNode* getNewNode(Record element)
     BstNode *newNode = new BstNode();
     newNode->element = element;
     newNode->left = newNode->right = NULL;
-    newNode->count = 0; // set counter for same dates as 1
     return newNode;
 }
 
@@ -141,7 +140,6 @@ BstNode* insert(BstNode *root, Record element)
     if (date_to_int(element.date) == date_to_int(root->element.date))
     {
 
-        (root->count)++; // counter for the same Dates!!!
         return root;
     }
     if (date_to_int(element.date) < date_to_int(root->element.date))
@@ -183,8 +181,7 @@ void inOrderRepr(BstNode *node, vector<BstNode *> &nodes)
     }
     inOrderRepr(node->left, nodes);
     nodes.push_back(node);
-    cout << node->element.date << " ( " << node->count << " ) "
-         << " | " << node->element.value << endl; // code for inorder traversal representation
+    cout << node->element.date << " | " << node->element.value << endl; // code for inorder traversal representation
     inOrderRepr(node->right, nodes);
 }
 
@@ -270,13 +267,6 @@ BstNode* deleteByDate(BstNode *root, string date)
     else
     {
 
-        if (root->count > 1)
-        {
-
-            (root->count)--; // decrement counter if the Date is repeated in the tree
-            return root;
-        }
-
         // case 1: node to be deleted has no children (aka is a leaf node)
         if (root->left == NULL && root->right == NULL)
         {
@@ -314,7 +304,6 @@ BstNode* deleteByDate(BstNode *root, string date)
 
             // switch the values
             root->element = min_right_subtree->element;
-            root->count = min_right_subtree->count; // copy counter of inorder successor to root node
 
             min_right_subtree->count = 0; // set counter equal to 0
 
