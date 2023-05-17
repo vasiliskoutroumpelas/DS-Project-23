@@ -19,7 +19,6 @@ typedef struct record
 typedef struct BstNode
 {
     Record element;
-    int count; // counter for same Dates
     BstNode *left;
     BstNode *right;
 } BstNode;
