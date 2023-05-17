@@ -334,7 +334,6 @@ BstNode* printInOrder(BstNode *root)
 
     cout << "Inorder Traversal Represantation is: " << endl;
     cout << "Date       |     Value" << endl << endl;
-    root = makeBalancedTree(root);
     vector<BstNode *> sortednodes;
     inOrderRepr(root, sortednodes);
     return root;
