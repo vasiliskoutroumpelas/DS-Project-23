@@ -304,8 +304,6 @@ BstNode* deleteByDate(BstNode *root, string date)
             // switch the values
             root->element = min_right_subtree->element;
 
-            min_right_subtree->count = 0; // set counter equal to 0
-
             // Delete the node, with the corresponding date the user entered, now as a leaf node
             root->right = deleteByDate(root->right, min_right_subtree->element.date);
         }
