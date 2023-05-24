@@ -38,19 +38,7 @@ vector<Node*> hashing(vector<Record> &data);
 void deleteHashNode(vector<Node*> &hashTable, string inputDate);
 void editHashNode(vector<Node*> &hashTable, string inputDate, long int newValue);
 void menu(vector<Node*> &hashTable);
-
-void printRecord(Record rec){
-    cout<<"|Direction: "<<rec.direction<<endl;
-    cout<<"|Year: "<<rec.year<<endl;
-    cout<<"|Date: "<<rec.date<<endl;
-    cout<<"|Weekday: "<<rec.weekday<<endl;
-    cout<<"|Country: "<<rec.country<<endl;
-    cout<<"|Commodity: "<<rec.commodity<<endl;
-    cout<<"|Transport Mode: "<<rec.transport_mode<<endl;
-    cout<<"|Measure: "<<rec.measure<<endl;
-    cout<<"|Value: "<<rec.value<<endl;
-    cout<<"|Cumulative: "<<rec.cumulative<<endl<<endl;;
-}
+void printRecord(Record rec);
 
 
 
@@ -370,6 +358,18 @@ void insertDataToField(int fieldCounter, string token, Record &record)
     }
 }
 
+void printRecord(Record rec){
+    cout<<"|Direction: "<<rec.direction<<endl;
+    cout<<"|Year: "<<rec.year<<endl;
+    cout<<"|Date: "<<rec.date<<endl;
+    cout<<"|Weekday: "<<rec.weekday<<endl;
+    cout<<"|Country: "<<rec.country<<endl;
+    cout<<"|Commodity: "<<rec.commodity<<endl;
+    cout<<"|Transport Mode: "<<rec.transport_mode<<endl;
+    cout<<"|Measure: "<<rec.measure<<endl;
+    cout<<"|Value: "<<rec.value<<endl;
+    cout<<"|Cumulative: "<<rec.cumulative<<endl<<endl;;
+}
 
 
 /*example: 
