@@ -17,13 +17,27 @@ typedef struct record
     long int cumulative;
 } Record;
 
+typedef struct node
+{
+   node* next=NULL;
+   node* head;
+   Record data;
+} Node;
+
 
 // original
 void csvToVector(ifstream &file, vector<Record> &Data);
 void splitStringToRecordFields(stringstream &ss, Record& record);
 void insertDataToField(int fieldCounter, string token, Record& record);
 
-
+void printRecord(Record rec);
+void pushHash(vector<Node*> &table, int hashValue, Record data);
+void printHash(vector<Node*> hashTable);
+void searchHash(vector<Node*> hashTable, string inputDate);
+vector<Node*> hashing(vector<Record> &data);
+void deleteHashNode(vector<Node*> &hashTable, string inputDate);
+void editHashNode(vector<Node*> &hashTable, string inputDate, long int newValue);
+void menu(vector<Node*> &hashTable);
 void printRecord(Record rec){
     cout<<"|Direction: "<<rec.direction<<endl;
     cout<<"|Year: "<<rec.year<<endl;
@@ -37,13 +51,36 @@ void printRecord(Record rec){
     cout<<"|Cumulative: "<<rec.cumulative<<endl<<endl;;
 }
 
-typedef struct node
+
+
+
+int main()
 {
-   node* next=NULL;
-  // node* previous=NULL;
-   node* head;
-   Record data;
-} Node;
+   // system("clear");
+    
+    ifstream file("data.csv");
+    if (!file.good())
+    {
+        cout << "error" << endl;
+        return -1;
+    }
+
+    vector<Record> data1, data2;
+    csvToVector(file, data1);
+    data2 = data1;
+
+
+    vector<Node*> hashTable;
+    hashTable=hashing(data2);
+
+    menu(hashTable);
+
+    
+    return 0;
+}
+
+
+
 
 void pushHash(vector<Node*> &table, int hashValue, Record data){
    Node* firstNode=table.at(hashValue);
@@ -54,7 +91,6 @@ void pushHash(vector<Node*> &table, int hashValue, Record data){
     if(!firstNode){
         table.at(hashValue)=new Node;
         firstNode=table.at(hashValue);
-       // firstNode=new Node;
         currentNode=firstNode;
     }
     else{
@@ -128,20 +164,12 @@ vector<Node*> hashing(vector<Record> &data)
     int m_hashTableSize =data.size()*0.75;
     int hx;
     vector<Node*> hashTable(m_hashTableSize);
-      
-    // cout<<hashTable.size()<<endl;
-    
-    // cout<<data.size()<<endl<<m_hashTableSize<<endl;
 
     for (int i = 0; i < data.size(); i++)
-    {
-        //cout<<data[i].date<<endl;
-        
+    {   
         hx=(data[i].date[0]+data[i].date[1]+data[i].date[2]+data[i].date[3]+data[i].date[4]+data[i].date[5]+data[i].date[6]+data[i].date[7]+data[i].date[8]+data[i].date[9])%11;
         
-       // cout<<i<<"\t"<<Hx<<"\t"<<data[i].date<<endl;
         pushHash(hashTable, hx, data[i]);
-       //cout<<Hx<<endl;
     }
     
      return hashTable;
@@ -227,11 +255,8 @@ void menu(vector<Node*> &hashTable){
             cout<<"(1) Search Date"<<endl<<"(2) Edit Record"<<endl<<"(3) Delete Node"<<endl<<"(4) Exit"<<endl;
             cout<<"--> ";
 
-            //get only int
-            //std::cin.clear();
-        // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
         cin>>option;
+        //Error in cin means the input isnt of int type
         if(option>4 || option<1 || !cin){      
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -259,77 +284,6 @@ void menu(vector<Node*> &hashTable){
     }
 
 }
-
-
-
-int main()
-{
-   // system("clear");
-    
-    ifstream file("data.csv");
-    if (!file.good())
-    {
-        cout << "error" << endl;
-        return -1;
-    }
-
-    vector<Record> data1, data2;
-    csvToVector(file, data1);
-    data2 = data1;
-
-
-    vector<Node*> hashTable;
-    hashTable=hashing(data2);
-
-
-
-    menu(hashTable);
-
-
-
-
-    /*example: 
-    -searches the specific date
-    -find 44 elements
-    -deletes the first know elemement that corresponds to the date
-    -executes search again and finds 43 elements
-
-        cout<<"Search Date: 14/12/2021"<<endl;
-        searchHash(hashTable, "14/12/2021");
-        deleteHashNode(hashTable, "14/12/2021");
-        searchHash(hashTable, "14/12/2021");
-    */
-
-
-   /*example:
-   -searches the specific date
-   -date does not exist
-   -prints error
-
-        cout<<"Search Date: 14/12/2023"<<endl;
-        searchHash(T, "14/12/2023");
-        
-    */
-
-
-    /*example:
-    -searches the specific date
-    -prints the current record
-    -changes the value of the record
-    -prints the edited record
-
-        editHashNode(hashTable, "14/12/2021", 123456);
-
-    */
-   
-
-    //printHash(T);
-
-    return 0;
-}
-
-
-
 
 
 
@@ -418,3 +372,42 @@ void insertDataToField(int fieldCounter, string token, Record &record)
         break;
     }
 }
+
+
+
+/*example: 
+    -searches the specific date
+    -find 44 elements
+    -deletes the first know elemement that corresponds to the date
+    -executes search again and finds 43 elements
+
+        cout<<"Search Date: 14/12/2021"<<endl;
+        searchHash(hashTable, "14/12/2021");
+        deleteHashNode(hashTable, "14/12/2021");
+        searchHash(hashTable, "14/12/2021");
+    */
+
+
+   /*example:
+   -searches the specific date
+   -date does not exist
+   -prints error
+
+        cout<<"Search Date: 14/12/2023"<<endl;
+        searchHash(T, "14/12/2023");
+        
+    */
+
+
+    /*example:
+    -searches the specific date
+    -prints the current record
+    -changes the value of the record
+    -prints the edited record
+
+        editHashNode(hashTable, "14/12/2021", 123456);
+
+    */
+   
+
+    //printHash(T);
