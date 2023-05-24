@@ -38,6 +38,7 @@ vector<Node*> hashing(vector<Record> &data);
 void deleteHashNode(vector<Node*> &hashTable, string inputDate);
 void editHashNode(vector<Node*> &hashTable, string inputDate, long int newValue);
 void menu(vector<Node*> &hashTable);
+
 void printRecord(Record rec){
     cout<<"|Direction: "<<rec.direction<<endl;
     cout<<"|Year: "<<rec.year<<endl;
@@ -126,11 +127,7 @@ cout<<"FINAL"<<endl;
             }
         cout<<endl;
         }
-          
-        
     }
-    
-
 }
 
 void searchHash(vector<Node*> hashTable, string inputDate){
