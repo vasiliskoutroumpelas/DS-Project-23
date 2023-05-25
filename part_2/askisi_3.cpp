@@ -70,7 +70,7 @@ int main()
 
 
 
-
+//** Adds a new Node(Record) to the hashtable in its respective position
 void pushHash(vector<Node*> &table, int hashValue, Record data){
    Node* firstNode=table.at(hashValue);
    Node* currentNode;
@@ -94,6 +94,8 @@ void pushHash(vector<Node*> &table, int hashValue, Record data){
    
 }
 
+
+//** Prints the whole hashtable (currently not in use because of the impracticality of the large input file)
 void printHash(vector<Node*> hashTable){
        
 Node* temp;
@@ -118,6 +120,8 @@ cout<<"FINAL"<<endl;
     }
 }
 
+
+// ** Searches for a record's value on the hash table based on an input date 
 void searchHash(vector<Node*> hashTable, string inputDate){
     int hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
     Node* temp;
@@ -143,6 +147,7 @@ void searchHash(vector<Node*> hashTable, string inputDate){
 
 }
 
+// ** Generates the hash table with the input data vector
 vector<Node*> hashing(vector<Record> &data)
 {
     
@@ -160,6 +165,7 @@ vector<Node*> hashing(vector<Record> &data)
      return hashTable;
 }
 
+// ** Deletes a record (Node) from the hastable based on an input date
 void deleteHashNode(vector<Node*> &hashTable, string inputDate){
        int hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
     Node* temp;
@@ -201,7 +207,8 @@ void deleteHashNode(vector<Node*> &hashTable, string inputDate){
     }
 }
 
-
+// ** Searches for a record based on a date and allows the user to change value field.
+// ** The old and edited data are printed on the terminal.
 void editHashNode(vector<Node*> &hashTable, string inputDate, long int newValue){
        int hx=(inputDate[0]+inputDate[1]+inputDate[2]+inputDate[3]+inputDate[4]+inputDate[5]+inputDate[6]+inputDate[7]+inputDate[8]+inputDate[9])%11;
     Node* temp;
@@ -227,7 +234,7 @@ void editHashNode(vector<Node*> &hashTable, string inputDate, long int newValue)
     }
 }
 
-
+// ** Provides a user menu that allows only the provided options to be selected.
 void menu(vector<Node*> &hashTable){
     int option=0;
     string tempString;
@@ -270,6 +277,19 @@ void menu(vector<Node*> &hashTable){
 
 }
 
+//** Function that prints the data of a record
+void printRecord(Record rec){
+    cout<<"|Direction: "<<rec.direction<<endl;
+    cout<<"|Year: "<<rec.year<<endl;
+    cout<<"|Date: "<<rec.date<<endl;
+    cout<<"|Weekday: "<<rec.weekday<<endl;
+    cout<<"|Country: "<<rec.country<<endl;
+    cout<<"|Commodity: "<<rec.commodity<<endl;
+    cout<<"|Transport Mode: "<<rec.transport_mode<<endl;
+    cout<<"|Measure: "<<rec.measure<<endl;
+    cout<<"|Value: "<<rec.value<<endl;
+    cout<<"|Cumulative: "<<rec.cumulative<<endl<<endl;;
+}
 
 
 
@@ -358,19 +378,9 @@ void insertDataToField(int fieldCounter, string token, Record &record)
     }
 }
 
-void printRecord(Record rec){
-    cout<<"|Direction: "<<rec.direction<<endl;
-    cout<<"|Year: "<<rec.year<<endl;
-    cout<<"|Date: "<<rec.date<<endl;
-    cout<<"|Weekday: "<<rec.weekday<<endl;
-    cout<<"|Country: "<<rec.country<<endl;
-    cout<<"|Commodity: "<<rec.commodity<<endl;
-    cout<<"|Transport Mode: "<<rec.transport_mode<<endl;
-    cout<<"|Measure: "<<rec.measure<<endl;
-    cout<<"|Value: "<<rec.value<<endl;
-    cout<<"|Cumulative: "<<rec.cumulative<<endl<<endl;;
-}
 
+
+//** Examples and explanations for the hash functions
 
 /*example: 
     -searches the specific date
