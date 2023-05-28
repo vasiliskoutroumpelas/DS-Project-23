@@ -28,7 +28,7 @@ typedef struct BstNode
 BstNode* getNewNode(Record element);
 BstNode* insert(BstNode *root, Record element);
 int search(BstNode *root, string date);
-void inOrderRepr(BstNode *node, vector<BstNode *> &nodes);
+void inOrderRepr(BstNode *node);
 void inOrder(BstNode *node, vector<BstNode *> &nodes);
 BstNode* sortedVectorToBST(vector<BstNode *> &nodes, int first, int last);
 BstNode* makeBalancedTree(BstNode *root);
@@ -172,16 +172,15 @@ int search(BstNode *root, string date)
 /* Function to traverse the skewed binary tree in-order and
    store its node pointers in vector nodes[] */
 
-void inOrderRepr(BstNode *node, vector<BstNode *> &nodes)
+void inOrderRepr(BstNode *node)
 {
     if (node == NULL)
     {
         return;
     }
-    inOrderRepr(node->left, nodes);
-    nodes.push_back(node);
+    inOrderRepr(node->left);
     cout << node->element.date << " | " << node->element.value << endl; // code for inorder traversal representation
-    inOrderRepr(node->right, nodes);
+    inOrderRepr(node->right);
 }
 
 /* Function to traverse the skewed binary tree in-order and
@@ -319,7 +318,7 @@ BstNode* printInOrder(BstNode *root)
     cout << "Inorder Traversal Represantation is: " << endl;
     cout << "Date       |     Value" << endl << endl;
     vector<BstNode *> sortednodes;
-    inOrderRepr(root, sortednodes);
+    inOrderRepr(root);
     return root;
 }
 
@@ -355,7 +354,7 @@ BstNode* printChangeValue(BstNode *root)
     {
         cout << "Value " << result1 << " is now the new Value for Date " << date << endl;
         vector<BstNode*> nodes1;
-        inOrderRepr(root, nodes1); // for the user to see the actual change
+        inOrderRepr(root); // for the user to see the actual change
     }
     return root;
 }
@@ -377,7 +376,7 @@ BstNode* printDelete(BstNode *root)
     // Doing Inorder Traversal to see the resulted balanced BST after deletion
     cout << "InOrder Traversal After Deletion: " << endl;
     vector<BstNode *> nodes2;
-    inOrderRepr(root, nodes2);
+    inOrderRepr(root);
     return root;
 }
 
