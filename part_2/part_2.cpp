@@ -74,7 +74,6 @@ BstNode *makeBalancedTree(BstNode *root);
 BstNode *printInOrder(BstNode *root);
 
 // ASKISI C
-void printRecord(Record rec);
 void pushHash(vector<Node *> &table, int hashValue, Record data);
 void printHash(vector<Node *> hashTable);
 void searchHash(vector<Node *> hashTable, string inputDate);
