@@ -82,7 +82,6 @@ vector<Node *> hashing(vector<Record> &data);
 void deleteHashNode(vector<Node *> &hashTable, string inputDate);
 void editHashNode(vector<Node *> &hashTable, string inputDate, long int newValue);
 void menuHash(vector<Node *> &hashTable);
-void printRecord(Record rec);
 
 // COMMON FOR ALL QUESTIONS
 int date_to_int(string date);
