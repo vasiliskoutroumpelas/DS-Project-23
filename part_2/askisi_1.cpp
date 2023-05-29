@@ -26,20 +26,20 @@ typedef struct BstNode
 
 
 BstNode* getNewNode(Record element);
-BstNode* insert(BstNode *root, Record element);
-int search(BstNode *root, string date);
+BstNode* insertDate(BstNode *root, Record element);
+int searchDate(BstNode *root, string date);
 void inOrderRepr(BstNode *node);
-void inOrder(BstNode *node, vector<BstNode *> &nodes);
+void saveNodesInOrder(BstNode *node, vector<BstNode *> &nodes);
 BstNode* sortedVectorToBST(vector<BstNode *> &nodes, int first, int last);
 BstNode* makeBalancedTree(BstNode *root);
 int changeValueByDate(BstNode *root, string date, int new_value);
 BstNode* deleteByDate(BstNode *root, string date);
 
-void menu(BstNode *root);
+void menuBSTDate(BstNode *root);
 BstNode* printInOrder(BstNode *root);
-BstNode* printSearch(BstNode *root);
-BstNode* printChangeValue(BstNode *root);
-BstNode* printDelete(BstNode *root);
+BstNode* printSearchByDate(BstNode *root);
+BstNode* printChangeValueByDate(BstNode *root);
+BstNode* printDeleteByDate(BstNode *root);
 
 int date_to_int(string date);
 
@@ -66,11 +66,11 @@ int main()
 
     for(Record element: data1)
     {
-        root = insert(root, element);
+        root = insertDate(root, element);
         root = makeBalancedTree(root);
     }
 
-    menu(root);
+    menuBSTDate(root);
 
     return 0;
 }
@@ -84,7 +84,7 @@ BstNode* getNewNode(Record element)
     return newNode;
 }
 
-BstNode* insert(BstNode *root, Record element)
+BstNode* insertDate(BstNode *root, Record element)
 {
 
     if (root == NULL)
@@ -101,17 +101,17 @@ BstNode* insert(BstNode *root, Record element)
     if (date_to_int(element.date) < date_to_int(root->element.date))
     {
 
-        root->left = insert(root->left, element);
+        root->left = insertDate(root->left, element);
     }
     else
     {
 
-        root->right = insert(root->right, element);
+        root->right = insertDate(root->right, element);
     }
     return root;
 }
 
-int search(BstNode *root, string date)
+int searchDate(BstNode *root, string date)
 {
     if (root == NULL)
         return -1;
@@ -120,10 +120,10 @@ int search(BstNode *root, string date)
         return root->element.value;
         
     else if (date_to_int(date) <= date_to_int(root->element.date))
-        return search(root->left, date);
+        return searchDate(root->left, date);
 
     else
-        return search(root->right, date);
+        return searchDate(root->right, date);
 }
 
 /* Function to traverse the skewed binary tree in-order and
@@ -143,15 +143,15 @@ void inOrderRepr(BstNode *node)
 /* Function to traverse the skewed binary tree in-order and
    store its node pointers in vector nodes[] AND ALSO PRINT THE ELEMENTS OF THAT VECTOR  */
 
-void inOrder(BstNode *node, vector<BstNode *> &nodes)
+void saveNodesInOrder(BstNode *node, vector<BstNode *> &nodes)
 {
     if (node == NULL)
     {
         return;
     }
-    inOrder(node->left, nodes);
+    saveNodesInOrder(node->left, nodes);
     nodes.push_back(node);
-    inOrder(node->right, nodes);
+    saveNodesInOrder(node->right, nodes);
 }
 
 /* A function that constructs Balanced
@@ -181,7 +181,7 @@ BstNode* makeBalancedTree(BstNode *root)
 {
     // Store nodes of given BST in sorted order
     vector<BstNode *> nodes;
-    inOrder(root, nodes);
+    saveNodesInOrder(root, nodes);
 
     // Constructs BST from nodes[] vector
     int n = nodes.size();
@@ -267,7 +267,7 @@ BstNode* deleteByDate(BstNode *root, string date)
     return root;
 }
 
-void menu(BstNode *root){
+void menuBSTDate(BstNode *root){
     int choice=0;
     bool quit = false;
     while (!quit) 
@@ -288,19 +288,19 @@ void menu(BstNode *root){
                 cin.get();
                 break;   
             case 2:
-                root = printSearch(root);
+                root = printSearchByDate(root);
                 cout << "Press Enter to return to menu..." << endl;
                 cin.ignore();
                 cin.get();
                 break;
             case 3:
-                root = printChangeValue(root); 
+                root = printChangeValueByDate(root); 
                 cout << "Press Enter to return to menu..." << endl;
                 cin.ignore();
                 cin.get();
                 break;
             case 4:
-                root = printDelete(root);
+                root = printDeleteByDate(root);
                 cout << "Press Enter to return to menu..." << endl;
                 cin.ignore();
                 cin.get();
@@ -326,21 +326,21 @@ BstNode* printInOrder(BstNode *root)
     return root;
 }
 
-BstNode* printSearch(BstNode *root)
+BstNode* printSearchByDate(BstNode *root)
 {
     // Code For Searching by Date
 
     string date;
     cout << "Enter date to be searched\n";
     cin >> date;
-    if (search(root, date) == -1)
+    if (searchDate(root, date) == -1)
         cout << "Empty tree or Date Not Found." << endl;
     else
-        cout << "Corresponding Value is: " << search(root, date) << endl;
+        cout << "Corresponding Value is: " << searchDate(root, date) << endl;
     return root;
 }
 
-BstNode* printChangeValue(BstNode *root)
+BstNode* printChangeValueByDate(BstNode *root)
 {
     // Code For Changing Value by Date
 
@@ -363,7 +363,7 @@ BstNode* printChangeValue(BstNode *root)
     return root;
 }
 
-BstNode* printDelete(BstNode *root)
+BstNode* printDeleteByDate(BstNode *root)
 {
     // Code For Deleting struct of corresponding date
 
