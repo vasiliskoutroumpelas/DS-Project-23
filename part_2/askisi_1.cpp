@@ -65,11 +65,10 @@ int main()
     BstNode *root = NULL; // Creating an empty tree
 
 
-    // for(Record element: data1)
-    for (int i = 0; i < 10; i++)
+    for(Record element: data1)
     {
-        // root = insert(root, element.date, element.value);
-        root = insert(root, data1.at(i));
+        root = insert(root, element);
+        root = makeBalancedTree(root);
     }
 
     int choice=0;
