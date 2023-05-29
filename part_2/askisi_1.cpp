@@ -62,9 +62,11 @@ int main()
 
     BstNode *root = NULL; // Creating an empty tree
 
+
     for (Record element : data1)
     {
         root = insertDate(root, element);
+
         root = makeBalancedTree(root);
     }
 
@@ -319,6 +321,7 @@ BstNode *printInOrder(BstNode *root)
     // Code For Inorder Traversal Representation
 
     cout << "Inorder Traversal Represantation is: " << endl;
+  
     cout << "Date       |     Value" << endl
          << endl;
     vector<BstNode *> sortednodes;
