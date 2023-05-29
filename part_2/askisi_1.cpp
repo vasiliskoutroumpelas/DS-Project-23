@@ -35,6 +35,7 @@ BstNode* makeBalancedTree(BstNode *root);
 int changeValueByDate(BstNode *root, string date, int new_value);
 BstNode* deleteByDate(BstNode *root, string date);
 
+void menu(BstNode *root);
 BstNode* printInOrder(BstNode *root);
 BstNode* printSearch(BstNode *root);
 BstNode* printChangeValue(BstNode *root);
@@ -69,51 +70,7 @@ int main()
         root = makeBalancedTree(root);
     }
 
-    int choice=0;
-    bool quit = false;
-    while (!quit) 
-    {
-        cout << "1. In Order Representaion." << endl;
-        cout << "2. Search value by date." << endl;
-        cout << "3. Change value that matches a date." << endl;
-        cout << "4. Delete a record that matches a date." << endl;
-        cout << "5. Exit program." << endl;
-        cout << "Enter your choice (1-5)" << endl;
-        cin >> choice;
-        switch (choice)
-        {
-            case 1:
-                root = printInOrder(root);
-                cout << "Press Enter to return to menu..." << endl;
-                cin.ignore();
-                cin.get();
-                break;   
-            case 2:
-                root = printSearch(root);
-                cout << "Press Enter to return to menu..." << endl;
-                cin.ignore();
-                cin.get();
-                break;
-            case 3:
-                root = printChangeValue(root); 
-                cout << "Press Enter to return to menu..." << endl;
-                cin.ignore();
-                cin.get();
-                break;
-            case 4:
-                root = printDelete(root);
-                cout << "Press Enter to return to menu..." << endl;
-                cin.ignore();
-                cin.get();
-                break;
-            case 5:
-                quit = true;
-                break;
-            default:
-                break;
-        }
-    }
-    cout << "Exit...Zzz" << endl;
+    menu(root);
 
     return 0;
 }
@@ -310,6 +267,53 @@ BstNode* deleteByDate(BstNode *root, string date)
     return root;
 }
 
+void menu(BstNode *root){
+    int choice=0;
+    bool quit = false;
+    while (!quit) 
+    {
+        cout << "1. In Order Representaion." << endl;
+        cout << "2. Search value by date." << endl;
+        cout << "3. Change value that matches a date." << endl;
+        cout << "4. Delete a record that matches a date." << endl;
+        cout << "5. Exit program." << endl;
+        cout << "Enter your choice (1-5)" << endl;
+        cin >> choice;
+        switch (choice)
+        {
+            case 1:
+                root = printInOrder(root);
+                cout << "Press Enter to return to menu..." << endl;
+                cin.ignore();
+                cin.get();
+                break;   
+            case 2:
+                root = printSearch(root);
+                cout << "Press Enter to return to menu..." << endl;
+                cin.ignore();
+                cin.get();
+                break;
+            case 3:
+                root = printChangeValue(root); 
+                cout << "Press Enter to return to menu..." << endl;
+                cin.ignore();
+                cin.get();
+                break;
+            case 4:
+                root = printDelete(root);
+                cout << "Press Enter to return to menu..." << endl;
+                cin.ignore();
+                cin.get();
+                break;
+            case 5:
+                quit = true;
+                break;
+            default:
+                break;
+        }
+    }
+    cout << "Exit...Zzz" << endl;
+}
 
 BstNode* printInOrder(BstNode *root)
 {
