@@ -23,21 +23,20 @@ typedef struct BstNode
     BstNode *right;
 } BstNode;
 
-
-BstNode* getNewNode(Record element);
-BstNode* insertValue(BstNode *root, Record element);
+BstNode *getNewNode(Record element);
+BstNode *insertValue(BstNode *root, Record element);
 string searchValue(BstNode *root, long int value);
 void inOrderRepr(BstNode *node);
 void saveNodesInOrder(BstNode *node, vector<BstNode *> &nodes);
-BstNode* sortedVectorToBST(vector<BstNode *> &nodes, int first, int last);
-BstNode* makeBalancedTree(BstNode *root);
+BstNode *sortedVectorToBST(vector<BstNode *> &nodes, int first, int last);
+BstNode *makeBalancedTree(BstNode *root);
 
 void menuBSTValue(BstNode *root);
-BstNode* printInOrder(BstNode *root);
+BstNode *printInOrder(BstNode *root);
 long int findMin(BstNode *root);
 long int findMax(BstNode *root);
-BstNode* printSearchMin(BstNode *root);
-BstNode* printSearchMax(BstNode *root);
+BstNode *printSearchMin(BstNode *root);
+BstNode *printSearchMax(BstNode *root);
 
 int date_to_int(string date);
 
@@ -62,8 +61,7 @@ int main()
 
     BstNode *root = NULL; // Creating an empty tree
 
-
-    for(Record element: data1)
+    for (Record element : data1)
     {
         root = insertValue(root, element);
         root = makeBalancedTree(root);
@@ -74,8 +72,7 @@ int main()
     return 0;
 }
 
-
-BstNode* getNewNode(Record element)
+BstNode *getNewNode(Record element)
 {
 
     BstNode *newNode = new BstNode();
@@ -84,7 +81,7 @@ BstNode* getNewNode(Record element)
     return newNode;
 }
 
-BstNode* insertValue(BstNode *root, Record element)
+BstNode *insertValue(BstNode *root, Record element)
 {
 
     if (root == NULL)
@@ -113,10 +110,11 @@ BstNode* insertValue(BstNode *root, Record element)
 
 string searchValue(BstNode *root, long int value)
 {
-    if (root == NULL){
+    if (root == NULL)
+    {
         string emptystring = " ";
         return emptystring;
-      }
+    }
 
     else if (root->element.value == value)
         return root->element.date;
@@ -138,7 +136,7 @@ void inOrderRepr(BstNode *node)
         return;
     }
     inOrderRepr(node->left);
-    cout << node->element.value<< " | " << node->element.date << endl; // code for inorder traversal representation
+    cout << node->element.value << " | " << node->element.date << endl; // code for inorder traversal representation
     inOrderRepr(node->right);
 }
 
@@ -158,7 +156,7 @@ void saveNodesInOrder(BstNode *node, vector<BstNode *> &nodes)
 
 /* A function that constructs Balanced
 Binary search Tree from a sorted vector */
-BstNode* sortedVectorToBST(vector<BstNode *> &nodes, int first, int last)
+BstNode *sortedVectorToBST(vector<BstNode *> &nodes, int first, int last)
 {
     // Base Case
     if (first > last)
@@ -179,7 +177,7 @@ BstNode* sortedVectorToBST(vector<BstNode *> &nodes, int first, int last)
     return root;
 }
 
-BstNode* makeBalancedTree(BstNode *root)
+BstNode *makeBalancedTree(BstNode *root)
 {
     // Store nodes of given BST in sorted order
     vector<BstNode *> nodes;
@@ -192,7 +190,7 @@ BstNode* makeBalancedTree(BstNode *root)
 
 void menuBSTValue(BstNode *root)
 {
-    int choice=0;
+    int choice = 0;
     bool quit = false;
     while (!quit)
     {
@@ -206,38 +204,38 @@ void menuBSTValue(BstNode *root)
         switch (choice)
         {
 
-            case 1:
-              root = printInOrder(root);
-              cout << "Press Enter to return to menu..." << endl;
-              cin.ignore();
-              cin.get();
-              break;
+        case 1:
+            root = printInOrder(root);
+            cout << "Press Enter to return to menu..." << endl;
+            cin.ignore();
+            cin.get();
+            break;
 
-            case 2:
-              root = printSearchMin(root);
-              cout << "Press Enter to return to menu..." << endl;
-              cin.ignore();
-              cin.get();
-              break;
+        case 2:
+            root = printSearchMin(root);
+            cout << "Press Enter to return to menu..." << endl;
+            cin.ignore();
+            cin.get();
+            break;
 
-            case 3:
-              root = printSearchMax(root);
-              cout << "Press Enter to return to menu..." << endl;
-              cin.ignore();
-              cin.get();
-              break;
+        case 3:
+            root = printSearchMax(root);
+            cout << "Press Enter to return to menu..." << endl;
+            cin.ignore();
+            cin.get();
+            break;
 
-            case 4:
-                quit = true;
-                break;
-            default:
-                break;
+        case 4:
+            quit = true;
+            break;
+        default:
+            break;
         }
     }
     cout << "Exit...Zzz" << endl;
 }
 
-BstNode* printSearchMin(BstNode *root)
+BstNode *printSearchMin(BstNode *root)
 {
     // Code For Searching Date by Minimum Value
 
@@ -247,8 +245,7 @@ BstNode* printSearchMin(BstNode *root)
     return root;
 }
 
-
-BstNode* printSearchMax(BstNode *root)
+BstNode *printSearchMax(BstNode *root)
 {
     // Code For Searching Date by Maximum Value
 
@@ -258,37 +255,35 @@ BstNode* printSearchMax(BstNode *root)
     return root;
 }
 
-BstNode* printInOrder(BstNode *root)
+BstNode *printInOrder(BstNode *root)
 {
     // Code For Inorder Traversal Representation
 
     cout << "Inorder Traversal Represantation is: " << endl;
-    cout << "Date       |     Value" << endl << endl;
+    cout << "Date       |     Value" << endl
+         << endl;
     vector<BstNode *> sortednodes;
     inOrderRepr(root);
     return root;
 }
 
-//Function that returns the minimum value of the BST tree
+// Function that returns the minimum value of the BST tree
 long int findMin(BstNode *root)
 {
 
-  vector<BstNode *> sortednodes;    //vector to store sorted values after inorder traversal
-  saveNodesInOrder(root, sortednodes);
-  return sortednodes.at(0)->element.value;   //the value at first index of vector is the smallest
+    vector<BstNode *> sortednodes; // vector to store sorted values after inorder traversal
+    saveNodesInOrder(root, sortednodes);
+    return sortednodes.at(0)->element.value; // the value at first index of vector is the smallest
 }
 
-
-//Function that returns the maximum value of the BST tree
+// Function that returns the maximum value of the BST tree
 long int findMax(BstNode *root)
 {
 
-  vector<BstNode *> sortednodes;    //vector to store sorted values after inorder traversal
-  saveNodesInOrder(root, sortednodes);
-  return sortednodes.at(sortednodes.size()-1)->element.value;         //the value at last index of vector is the largest
+    vector<BstNode *> sortednodes; // vector to store sorted values after inorder traversal
+    saveNodesInOrder(root, sortednodes);
+    return sortednodes.at(sortednodes.size() - 1)->element.value; // the value at last index of vector is the largest
 }
-
-
 
 void csvToVector(ifstream &file, vector<Record> &data)
 {
