@@ -116,6 +116,7 @@ int main()
     return 0;
 }
 
+
 BstNode* getNewNode(Record element)
 {
 
