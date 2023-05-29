@@ -25,7 +25,6 @@ typedef struct BstNode
 } BstNode;
 
 
-
 BstNode* getNewNode(Record element);
 BstNode* insert(BstNode *root, Record element);
 string search(BstNode *root, long int value);
