@@ -19,7 +19,6 @@ typedef struct record
 typedef struct BstNode
 {
     Record element;
-    int count; // counter for same Dates
     BstNode *left;
     BstNode *right;
 } BstNode;
@@ -33,6 +32,7 @@ void inOrder(BstNode *node, vector<BstNode *> &nodes);
 BstNode* sortedVectorToBST(vector<BstNode *> &nodes, int first, int last);
 BstNode* makeBalancedTree(BstNode *root);
 
+void menu(BstNode *root);
 BstNode* printInOrder(BstNode *root);
 long int findMin(BstNode *root);
 long int findMax(BstNode *root);
@@ -69,49 +69,7 @@ int main()
         root = makeBalancedTree(root);
     }
 
-    int choice=0;
-    bool quit = false;
-    while (!quit)
-    {
-
-        cout << "1. In Order Representaion." << endl;
-        cout << "2. Search Date By Minimum Value." << endl;
-        cout << "3. Search Date By Maximum Value." << endl;
-        cout << "4. Exit program." << endl;
-        cout << "Enter your choice (1-2)" << endl;
-        cin >> choice;
-        switch (choice)
-        {
-
-            case 1:
-              root = printInOrder(root);
-              cout << "Press Enter to return to menu..." << endl;
-              cin.ignore();
-              cin.get();
-              break;
-
-            case 2:
-              root = printSearchMin(root);
-              cout << "Press Enter to return to menu..." << endl;
-              cin.ignore();
-              cin.get();
-              break;
-
-            case 3:
-              root = printSearchMax(root);
-              cout << "Press Enter to return to menu..." << endl;
-              cin.ignore();
-              cin.get();
-              break;
-
-            case 4:
-                quit = true;
-                break;
-            default:
-                break;
-        }
-    }
-    cout << "Exit...Zzz" << endl;
+    menu(root);
 
     return 0;
 }
@@ -123,7 +81,6 @@ BstNode* getNewNode(Record element)
     BstNode *newNode = new BstNode();
     newNode->element = element;
     newNode->left = newNode->right = NULL;
-    newNode->count = 1; // set counter for same dates as 1
     return newNode;
 }
 
@@ -139,7 +96,6 @@ BstNode* insert(BstNode *root, Record element)
     if (element.value == root->element.value)
     {
 
-        (root->count)++; // counter for the same Dates!!!
         return root;
     }
     if (element.value < root->element.value)
@@ -183,8 +139,7 @@ void inOrderRepr(BstNode *node, vector<BstNode *> &nodes)
     }
     inOrderRepr(node->left, nodes);
     nodes.push_back(node);
-    cout << node->element.value << " ( " << node->count << " ) "
-         << " | " << node->element.date << endl; // code for inorder traversal representation
+    cout << node->element.value<< " | " << node->element.date << endl; // code for inorder traversal representation
     inOrderRepr(node->right, nodes);
 }
 
@@ -236,7 +191,52 @@ BstNode* makeBalancedTree(BstNode *root)
     return sortedVectorToBST(nodes, 0, n - 1);
 }
 
+void menu(BstNode *root)
+{
+    int choice=0;
+    bool quit = false;
+    while (!quit)
+    {
 
+        cout << "1. In Order Representaion." << endl;
+        cout << "2. Search Date By Minimum Value." << endl;
+        cout << "3. Search Date By Maximum Value." << endl;
+        cout << "4. Exit program." << endl;
+        cout << "Enter your choice (1-2)" << endl;
+        cin >> choice;
+        switch (choice)
+        {
+
+            case 1:
+              root = printInOrder(root);
+              cout << "Press Enter to return to menu..." << endl;
+              cin.ignore();
+              cin.get();
+              break;
+
+            case 2:
+              root = printSearchMin(root);
+              cout << "Press Enter to return to menu..." << endl;
+              cin.ignore();
+              cin.get();
+              break;
+
+            case 3:
+              root = printSearchMax(root);
+              cout << "Press Enter to return to menu..." << endl;
+              cin.ignore();
+              cin.get();
+              break;
+
+            case 4:
+                quit = true;
+                break;
+            default:
+                break;
+        }
+    }
+    cout << "Exit...Zzz" << endl;
+}
 
 BstNode* printSearchMin(BstNode *root)
 {
