@@ -13,8 +13,8 @@ typedef struct record
     string commodity;
     string transport_mode;
     string measure;
-    long int value;
-    long int cumulative;
+    long long value;
+    long long cumulative;
 } Record;
 
 typedef struct node
@@ -35,7 +35,7 @@ void printHash(vector<Node *> hashTable);
 void searchHash(vector<Node *> hashTable, string inputDate);
 vector<Node *> hashing(vector<Record> &data);
 void deleteHashNode(vector<Node *> &hashTable, string inputDate);
-void editHashNode(vector<Node *> &hashTable, string inputDate, long int newValue);
+void editHashNode(vector<Node *> &hashTable, string inputDate, long long newValue);
 void menu(vector<Node *> &hashTable);
 void printRecord(Record rec);
 
@@ -209,7 +209,7 @@ void deleteHashNode(vector<Node *> &hashTable, string inputDate)
 
 // ** Searches for a record based on a date and allows the user to change value field.
 // ** The old and edited data are printed on the terminal.
-void editHashNode(vector<Node *> &hashTable, string inputDate, long int newValue)
+void editHashNode(vector<Node *> &hashTable, string inputDate, long long newValue)
 {
     int hx = (inputDate[0] + inputDate[1] + inputDate[2] + inputDate[3] + inputDate[4] + inputDate[5] + inputDate[6] + inputDate[7] + inputDate[8] + inputDate[9]) % 11;
     Node *temp;
@@ -246,7 +246,7 @@ void menu(vector<Node *> &hashTable)
 {
     int option = 0;
     string tempString;
-    long int tempVal;
+    long long tempVal;
 
     while (true)
     {

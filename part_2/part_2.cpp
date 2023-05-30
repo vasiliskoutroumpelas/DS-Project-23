@@ -12,8 +12,8 @@ typedef struct record
     string commodity;
     string transport_mode;
     string measure;
-    long int value;
-    long int cumulative;
+    long long value;
+    long long cumulative;
 } Record;
 
 typedef struct BstNode
@@ -50,7 +50,7 @@ BstNode *printDeleteByDate(BstNode *root);
 // ASKISI B
 BstNode *getNewNode(Record element);
 BstNode *insertValue(BstNode *root, Record element);
-string searchValue(BstNode *root, long int value);
+string searchValue(BstNode *root, long long value);
 void inOrderRepr(BstNode *node);
 void saveNodesInOrder(BstNode *node, vector<BstNode *> &nodes);
 BstNode *sortedVectorToBST(vector<BstNode *> &nodes, int first, int last);
@@ -58,8 +58,8 @@ BstNode *makeBalancedTree(BstNode *root);
 
 void menuBSTValue(BstNode *root);
 BstNode *printInOrder(BstNode *root);
-long int findMin(BstNode *root);
-long int findMax(BstNode *root);
+long long findMin(BstNode *root);
+long long findMax(BstNode *root);
 BstNode *printSearchMin(BstNode *root);
 BstNode *printSearchMax(BstNode *root);
 
@@ -79,7 +79,7 @@ void printHash(vector<Node *> hashTable);
 void searchHash(vector<Node *> hashTable, string inputDate);
 vector<Node *> hashing(vector<Record> &data);
 void deleteHashNode(vector<Node *> &hashTable, string inputDate);
-void editHashNode(vector<Node *> &hashTable, string inputDate, long int newValue);
+void editHashNode(vector<Node *> &hashTable, string inputDate, long long newValue);
 void menuHash(vector<Node *> &hashTable);
 void printRecord(Record rec);
 
@@ -512,7 +512,7 @@ BstNode *insertValue(BstNode *root, Record element)
     return root;
 }
 
-string searchValue(BstNode *root, long int value)
+string searchValue(BstNode *root, long long value)
 {
     if (root == NULL)
     {
@@ -581,7 +581,7 @@ void menuBSTValue(BstNode *root)
 }
 
 // Function that returns the minimum value of the BST tree
-long int findMin(BstNode *root)
+long long findMin(BstNode *root)
 {
 
     vector<BstNode *> sortednodes; // vector to store sorted values after inorder traversal
@@ -590,7 +590,7 @@ long int findMin(BstNode *root)
 }
 
 // Function that returns the maximum value of the BST tree
-long int findMax(BstNode *root)
+long long findMax(BstNode *root)
 {
 
     vector<BstNode *> sortednodes; // vector to store sorted values after inorder traversal
@@ -601,7 +601,7 @@ BstNode *printSearchMin(BstNode *root)
 {
     // Code For Searching Date by Minimum Value
 
-    long int min = findMin(root);
+    long long min = findMin(root);
     cout << "Minimum value is " << min << endl;
     cout << "Corresponding Date is: " << searchValue(root, min) << endl;
     return root;
@@ -611,7 +611,7 @@ BstNode *printSearchMax(BstNode *root)
 {
     // Code For Searching Date by Maximum Value
 
-    long int max = findMax(root);
+    long long max = findMax(root);
     cout << "Maximum value is " << max << endl;
     cout << "Corresponding Date is: " << searchValue(root, max) << endl;
     return root;
@@ -764,7 +764,7 @@ void deleteHashNode(vector<Node *> &hashTable, string inputDate)
 
 // ** Searches for a record based on a date and allows the user to change value field.
 // ** The old and edited data are printed on the terminal.
-void editHashNode(vector<Node *> &hashTable, string inputDate, long int newValue)
+void editHashNode(vector<Node *> &hashTable, string inputDate, long long newValue)
 {
     int hx = (inputDate[0] + inputDate[1] + inputDate[2] + inputDate[3] + inputDate[4] + inputDate[5] + inputDate[6] + inputDate[7] + inputDate[8] + inputDate[9]) % 11;
     Node *temp;
@@ -801,7 +801,7 @@ void menuHash(vector<Node *> &hashTable)
 {
     int option = 0;
     string tempString;
-    long int tempVal;
+    long long tempVal;
     bool quit = false;
     while (!quit)
     {

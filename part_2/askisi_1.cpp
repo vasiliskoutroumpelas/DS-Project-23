@@ -12,8 +12,8 @@ typedef struct record
     string commodity;
     string transport_mode;
     string measure;
-    long int value;
-    long int cumulative;
+    long long value;
+    long long cumulative;
 } Record;
 
 typedef struct BstNode

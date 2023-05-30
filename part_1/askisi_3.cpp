@@ -13,8 +13,8 @@ typedef struct record
     string commodity;
     string transport_mode;
     string measure;
-    long int value;
-    long int cumulative;
+    long long value;
+    long long cumulative;
 } Record;
 
 int binarySearch(vector<Record> &array, int key, int indexMin, int indexMax);
@@ -353,10 +353,10 @@ void insertDataToField(int fieldCounter, string token, Record &record)
         record.measure = token;
         break;
     case 8:
-        record.value = stol(token);
+        record.value = stoll(token);
         break;
     case 9:
-        record.cumulative = stol(token);
+        record.cumulative = stoll(token);
         break;
     default:
         break;
